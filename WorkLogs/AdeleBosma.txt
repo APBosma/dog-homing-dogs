@@ -1,0 +1,7 @@
+Date: 9/12/2025
+Start–End: 10:30-10:50
+Task: Created work logs and added collaborators to new repository.
+Estimate: 0.5 hours
+Actual: .33 hours
+Notes: Need to make sure Phil knows and work with Bo and Matt GitHub.
+Backfilled: No
