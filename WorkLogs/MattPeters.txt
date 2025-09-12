@@ -1,0 +1,8 @@
+Matt Work Log
+
+9/12/2025
+10:35-10:50
+Created the GitHub “dogs-homing-dogs”.
+Estimate: 10 minutes
+Actual: 15 minutes
+Notes: Learned more about GitHub and best way to get the project set up.
