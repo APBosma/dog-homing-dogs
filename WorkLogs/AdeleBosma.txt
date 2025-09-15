@@ -5,3 +5,11 @@ Estimate: 0.5 hours
 Actual: .33 hours
 Notes: Need to make sure Phil knows and work with Bo and Matt GitHub.
 Backfilled: No
+
+Date: 9/15/2025
+Start–End: 8:00-9:09
+Task: Research current animal shelter and foster network websites
+Estimate: 1 hour
+Actual: 1 hour 
+Notes: Google Doc is called Software Eng: Requirements Research
+Backfilled: No
