@@ -2,11 +2,12 @@
 Project for software engineering.
 
 Come up with a title (Working Title)
-Overview
+
+**Overview**
 
 FosterConnect is an app designed to help communities better care for stray and at-risk dogs and cats. Inspired by real experiences with overcrowded shelters and limited resources, the app creates a direct connection between people who find stray dogs, those who can foster them, and potential adopters. It relies on the generosity of others and it not an application used to proffit from people. although we may potentially run ads to pay for upkeep. 
-
-Core Features
+**
+Core Features**
 
   Foster Network
   
@@ -28,7 +29,7 @@ Core Features
   
   Helps users know if bringing a stray to a shelter is an option.
 
-Purpose
+**Purpose**
 
   Too often, stray and surrendered dogs are left without safe options because local shelters are overcrowded. This app provides a community-driven solution by:
   
@@ -38,11 +39,11 @@ Purpose
   
   Offering better visibility into shelter space when available.
 
-Status
-
+**Status
+**
   This project is in the early planning stages. We are currently exploring what features are feasible to implement and how best to design the user experience.
 
-Next Steps
+**Next Steps**
 
   Finalize core features based on feedback and project requirements.
   
