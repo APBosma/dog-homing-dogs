@@ -13,3 +13,11 @@ Estimate: 1 hour
 Actual: 1 hour 
 Notes: Google Doc is called Software Eng: Requirements Research
 Backfilled: No
+
+Date: 9/15/2025
+Start–End: 9:15 - 9:41
+Task: Meeting about narrowing down what our project is
+Estimate: 1 hour
+Actual: 36 minutes
+Notes: Went well, Phil sent us the notes
+Backfilled: No
