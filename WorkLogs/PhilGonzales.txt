@@ -1,6 +1,7 @@
 Date: 9/12/2025
 Start–End: 6:20 - 8:30
-Task: Put together agenda for first meeting and got my user interview question together- Topics Included:
+Task: Put together agenda for first meeting(discord) - Got my user interview question together - Created and uploaded README(git)
+Agenda Topics:
   Add names to top header
   Define Users
   Go over client interactions - assign importance 
