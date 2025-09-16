@@ -13,3 +13,12 @@ Estimate: 1 hours
 Actual: 2 hours 20 minutes
 Notes: I guess this is the thing I missed friday haha. It took me longer because I am trying to put together a roadmap. 
 Backfilled: No
+
+
+Date: 9/15/2025
+Start–End: 9:15 - 9:41
+Task: Meeting about narrowing down what our project is
+Estimate: 1 hour
+Actual: 36 minutes
+Notes: Went well, I sent the notes
+Backfilled: No
