@@ -29,3 +29,19 @@ Estimate: 1 hour
 Actual: 2 hours
 Notes: Dogs were cute, will send notes after meeting with Second Chance for Cats tomorrow.
 Backfilled: No
+
+Date: 9/20/2025
+Start–End: 10:30-12:02
+Task: Meet with Second Chance for Cats for an interview and to volunteer
+Estimate: 1 hour
+Actual: 1.5 hours
+Notes: Cats were very cute. Sent all information I learned as a pdf in the group chat in Discord.
+Backfilled: No
+
+Date: 9/20/2025
+Start–End: 12:40-3:02
+Task: Write up notes from interviews and add to our MOSCOW requirements word doc 
+Estimate: 1 hour
+Actual: 2.5 hours
+Notes: I'm tired.
+Backfilled: No
