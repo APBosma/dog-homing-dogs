@@ -21,3 +21,11 @@ Estimate: 1 hour
 Actual: 36 minutes
 Notes: Went well, Phil sent us the notes
 Backfilled: No
+
+Date: 9/19/2025
+Start–End: 4:00-6:00
+Task: Meet with Mercer County Animal Shelter for an interview and to volunteer
+Estimate: 1 hour
+Actual: 2 hours
+Notes: Dogs were cute, will send notes after meeting with Second Chance for Cats tomorrow.
+Backfilled: No
