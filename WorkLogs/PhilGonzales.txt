@@ -43,3 +43,9 @@ Estimate: 4 hour
 Actual: 3 hours
 Notes: 
 -------------- week 2 report ^
+Date: 9/23/2025
+Start–End: 8-9
+Task: Created API doc and sent to team
+Estimate: .5 hour
+Actual: 1 hours
+Notes: Sent for the team to fill out as they have time 
