@@ -45,3 +45,11 @@ Estimate: 1 hour
 Actual: 2.5 hours
 Notes: I'm tired.
 Backfilled: No
+
+Date: 9/24/2025
+Start–End: 10:00-10:24 am
+Task: Worked on API design proposal
+Estimate: 1 hour
+Actual: .5 hours
+Notes: Worked on brainstorming what tables we would need. Added what would be a PK or FK
+Backfilled: No
