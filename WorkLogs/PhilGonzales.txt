@@ -22,3 +22,30 @@ Estimate: 1 hour
 Actual: 36 minutes
 Notes: Went well, I sent the notes
 Backfilled: No
+
+
+Estimate: 1 hour
+Actual: 36 minutes
+Notes: Went well, Phil sent us the notes
+Backfilled: No
+---------------- week 1 report ^
+Date: 9/20/2025
+Start–End: 8ish
+Task: started to put together moscow with adele, put together powerpoint. chatted with everyone via discord
+Estimate: 1 hour
+Actual: 2 hours
+Notes:
+
+Date: 9/21/2025
+Start–End: thgroughout day
+Task: finished the powerpoint
+Estimate: 4 hour
+Actual: 3 hours
+Notes: 
+-------------- week 2 report ^
+Date: 9/23/2025
+Start–End: 8-9
+Task: Created API doc and sent to team
+Estimate: .5 hour
+Actual: 1 hours
+Notes: Sent for the team to fill out as they have time 
