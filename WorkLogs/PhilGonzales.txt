@@ -49,3 +49,11 @@ Task: Created API doc and sent to team
 Estimate: .5 hour
 Actual: 1 hours
 Notes: Sent for the team to fill out as they have time 
+
+Date: 9/28/2025
+Start–End: 7:00-8:00
+Task: made rough designs for application in canva 
+Estimate: 1 hour
+Actual: 1 hours
+Notes: 
+-------------- Week 3 report ^
