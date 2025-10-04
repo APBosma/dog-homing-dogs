@@ -53,3 +53,11 @@ Estimate: 1 hour
 Actual: .5 hours
 Notes: Worked on brainstorming what tables we would need. Added what would be a PK or FK
 Backfilled: No
+
+Date: 9/28/2025
+Start–End: 7:00 - 8:29 pm
+Task: Worked on prototypes
+Estimate: 1 hour
+Actual: 1.5 hours
+Notes: Pain.
+Backfilled: No
