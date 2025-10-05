@@ -20,3 +20,18 @@ Had our first meeting. Discussed requirements and ideas.
 Estimate: 15 minutes
 Actual: 30 minutes
 Notes: We got our first meeting down and found a good way to discuss plans and ideas
+
+9/25/25 
+8:40 - 9:40
+Finished my section of the API
+Estimate: 30 mins
+Actual: 1 hr
+Notes: We all worked evenly on the proposal and the finished product turned out nice.
+
+9/29/25
+8:40 - 9:05
+Worked on a prototype of our website
+Estimate: 45 mins
+Actual: 25 minutes
+Notes: It helped provide some good ideas on what to focus on when starting our project.
+
