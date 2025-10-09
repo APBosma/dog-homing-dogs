@@ -61,3 +61,19 @@ Estimate: 1 hour
 Actual: 1.5 hours
 Notes: Pain.
 Backfilled: No
+
+Date: 10/8/2025
+Start–End: 10:12-10:45 am
+Task: Made excel sheet with all tables and their columns
+Estimate: 1 hour
+Actual: .5 hours
+Notes: I asked Matt to do the typing while I supervised and added whatever was missing.
+Backfilled: No
+
+Date: 10/8/2025
+Start–End: 5:00-5:15 pm
+Task: Made excel sheet with all tables and their columns
+Estimate: 15 minutes
+Actual: 15 minutes
+Notes: Just added one more table 
+Backfilled: No
