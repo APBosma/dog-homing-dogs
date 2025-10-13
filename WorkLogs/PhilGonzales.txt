@@ -57,11 +57,15 @@ Estimate: 1 hour
 Actual: 1 hours
 Notes: 
 -------------- Week 3 report ^
-Just chatted in the discord, did all of the work the week prior 
+
+Just chatted in the discord, did all of the work the week prior
+
 -------------- Week 4 report ^Date: 10/12/2025
+
 Start–End: 7:30-9:45 (am)
 Task: Researched API design and a video on how to tie it in to SQlite in preperation for coding. 
 Estimate: 2 hours
 Actual: 2 hours 15 mins
 Notes: This is going to be a bit of a head ache; we should map out how the api will connect better. 
--------------- Week 3 report ^
+
+-------------- Week 5 report ^
