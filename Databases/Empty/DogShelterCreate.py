@@ -89,7 +89,17 @@ CREATE TABLE IF NOT EXISTS Adoption (
 )
 """)
 
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS ShelterOwner (
+    shelter_id INTEGER,
+    account_id INTEGER,
+    PRIMARY KEY (shelter_id, account_id),
+    FOREIGN KEY (shelter_id) REFERENCES Shelter(shelter_id),
+    FOREIGN KEY (account_id) REFERENCES Account(account_id)
+)
+""")
 
 conn.commit()
 
 conn.close()
+
