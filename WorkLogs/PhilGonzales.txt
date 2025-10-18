@@ -77,10 +77,10 @@ Estimate: -
 Actual: 20 mins
 Notes: 
 
-Start–End: 9:45- (am)
-Task: Began Api Stuffs 
+Start–End: 9:45-11:30 (am)
+Task: Began Api Stuffs (account)
 Estimate: -
-Actual: 20 mins
-Notes: 
+Actual: 1 hour 45 minutes 
+Notes: we really need temp data in the database to test stuff. makes it really annoying to not have that. 
 
 -------------- Week 5 report ^
