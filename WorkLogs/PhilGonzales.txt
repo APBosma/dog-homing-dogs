@@ -69,3 +69,18 @@ Actual: 2 hours 15 mins
 Notes: This is going to be a bit of a head ache; we should map out how the api will connect better. 
 
 -------------- Week 5 report ^
+
+
+Start–End: 9:25-9:45 (am)
+Task: Edited the Readme so we know where the files will be
+Estimate: -
+Actual: 20 mins
+Notes: 
+
+Start–End: 9:45- (am)
+Task: Began Api Stuffs 
+Estimate: -
+Actual: 20 mins
+Notes: 
+
+-------------- Week 5 report ^
