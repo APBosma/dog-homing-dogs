@@ -1,4 +1,26 @@
 # dog-homing-dogs
+
+
+dog-homing-dogs/Databases/empty
+│
+├── DogShelterCreate.py           # <-- Run this once to create the .db file
+├── Not_A_Virus.txt           # <-- Run this once to create the .db file
+├── animal_shelter.db      # <-- This gets created automatically
+├── app.py                 # <-- Flask app
+├── database.py            # <-- Database connection helper
+├── routes/                # <-- All route files
+│   ├── account_routes.py
+│   ├── shelter_routes.py
+│   ├── animal_routes.py
+│   ├── foster_routes.py
+│   ├── adoption_routes.py
+│   └── owner_routes.py
+└── requirements.txt
+
+
+
+
+
 Project for software engineering.
 
 Come up with a title (Working Title)
