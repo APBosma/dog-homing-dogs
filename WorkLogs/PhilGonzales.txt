@@ -83,4 +83,10 @@ Estimate: -
 Actual: 1 hour 45 minutes 
 Notes: we really need temp data in the database to test stuff. makes it really annoying to not have that. 
 
+Start–End: 8:00-9:01 (am)
+Task: Eddited and added some api crap (account/animal)
+Estimate: -
+Actual: 1 hour 1 minute
+Notes: eddited the api and added animal api info (will need to add functions to do the things)
+
 -------------- Week 5 report ^
