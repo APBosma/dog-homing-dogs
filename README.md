@@ -5,15 +5,9 @@ dog-homing-dogs/Databases/empty
 │
 ├── DogShelterCreate.py           # Run this once to create the .db file
 ├── Not_A_Virus.txt           #  Run this once to create the .db file
-├── animal_shelter.db      # his gets created automatically
-├── routes/                # All route files
-│   ├── account_routes.py
-│   ├── shelter_routes.py
-│   ├── animal_routes.py
-│   ├── foster_routes.py
-│   ├── adoption_routes.py
-│   └── owner_routes.py
-└── requirements.txt
+├── animal_shelter.db      # This gets created automatically
+├── app.py                # Where our api is 
+└── requirements.txt         # Will need to add this later i think, it was in al lthe examples i could find 
 
 
 Project for software engineering.
