@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+    <title>All Animals</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            {% if shelterName %}
+                <p>{{ shelterName }}'s Animals</p>
+            {% else %}
+                <p>All Animals</p>
+            {% endif %}
+        </header>
+        <nav id="navbar">
+            <a href="index.html">All Animals</a>
+            <a href="#">Something Else, IDK</a>
+        </nav>
+
+        <body>
+            {% if animals %}
+                {% for theAnimal in Animal %}
+                    <div><p>{{ theAnimal['name'] }} 
+                        <b>{{ theAnimal['type'] }}, {{ theAnimal['breed'] }}</b>
+                        <b>{{ theAnimal['sex'] }}</b>
+                    </p></div>
+                {% endfor %}
+            {% endif %}
+        </body>
+
+        <footer>Work in progress.</a></footer>
+    </div>
+</body>
+</html>
