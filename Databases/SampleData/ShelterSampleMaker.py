@@ -99,6 +99,8 @@ CREATE TABLE IF NOT EXISTS ShelterOwner (
 )
 """)
 
+# Inserts start here
+
 cursor.execute(
     """
     -- Shelters
