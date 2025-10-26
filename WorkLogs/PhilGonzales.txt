@@ -89,4 +89,13 @@ Estimate: -
 Actual: 1 hour 1 minute
 Notes: eddited the api and added animal api info (will need to add functions to do the things)
 
--------------- Week 5 report ^
+-------------- Week 6 report ^
+
+Date: 10/26/2025
+Start–End: 8:00-11:01 (am)
+Task: Tried to figure out how to get the api to actually talk to the database
+Estimate: -
+Actual: 3 hours
+Notes: Ended up doing basically nothing because the database keeps saying it's missing columns. i dont know what to do, could not find any help online. 
+
+-------------- Week 7 report ^
