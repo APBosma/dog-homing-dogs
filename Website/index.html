@@ -19,10 +19,10 @@
 
         <body>
             {% if animals %}
-                {% for theAnimal in Animal %}
-                    <div><p>{{ theAnimal['name'] }} 
-                        <b>{{ theAnimal['type'] }}, {{ theAnimal['breed'] }}</b>
-                        <b>{{ theAnimal['sex'] }}</b>
+                {% for animal in animals %}
+                    <div><p>{{ animal['name'] }} 
+                        <b>{{ animal['type'] }}, {{ animal['breed'] }}</b>
+                        <b>{{ animal['sex'] }}</b>
                     </p></div>
                 {% endfor %}
             {% endif %}
