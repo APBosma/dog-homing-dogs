@@ -85,3 +85,11 @@ Estimate: 1 hour
 Actual: 2 hours
 Notes: Mostly just asking people to push their stuff up
 Backfilled: No
+
+Date: 10/25/2025
+Start–End: 10:30 am-12:15 pm
+Task: Start Website With Flask Stuff
+Estimate: 1 hour
+Actual: 1.75 hours
+Notes: Just waiting for sample data to begin testing what I currently have written
+Backfilled: No
