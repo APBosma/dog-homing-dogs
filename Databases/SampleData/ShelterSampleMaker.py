@@ -99,71 +99,56 @@ CREATE TABLE IF NOT EXISTS ShelterOwner (
 )
 """)
 
+conn.commit()
+
 # Inserts start here
 
-cursor.execute(
-    """
-    -- Shelters
-INSERT INTO Shelter (shelter_id, name, email, phone, street1, city, state, zip, date_shelter_added, no_kill, max_dogs, max_cats, cats, dogs) VALUES
-(1, 'Happy Tails Shelter', 'contact@happytails.org', '512-555-0110', '123 Paw St', 'Austin', 'TX', '73301', '2024-01-15', 1, 40, 30, 1, 1),
-(2, 'Whisker Haven', 'hello@whiskerhaven.org', '415-555-0142', '88 Meow Ave', 'San Francisco', 'CA', '94102', '2024-03-02', 1, 10, 50, 1, 0),
-(3, 'Four Paws Rescue', 'team@fourpaws.net', '206-555-0188', '740 Bark Blvd', 'Seattle', 'WA', '98101', '2023-11-20', 0, 35, 20, 1, 1);""")
+# Insert Accounts (some are adopters, fosters, shelter staff)
+cursor.execute("""
+INSERT INTO Account (type, firstname, lastname, email, phone, street1, datetime_created, datetime_modified)
+VALUES 
+('staff', 'Emily', 'Johnson', 'emily.johnson@shelter.org', '555-1001', '123 Oak St', '2025-01-10', '2025-03-12'),
+('adopter', 'James', 'Miller', 'james.miller@example.com', '555-2002', '45 Pine Ave', '2025-02-02', '2025-02-02'),
+('foster', 'Laura', 'Kim', 'laura.kim@example.com', '555-3003', '78 Maple Rd', '2025-03-15', '2025-05-01'),
+('adopter', 'Carlos', 'Hernandez', 'carlos.hernandez@example.com', '555-4004', '56 Elm St', '2025-03-20', '2025-03-20')
+""")
 
-cursor.execute(
-    """
--- Accounts (adopters/fosters/owners/staff)
-INSERT INTO Account (account_id, type, firstname, lastname, email, phone, street1) VALUES
-(1, 'Owner',  'Avery', 'Chen',     'avery@happytails.org', '512-555-1000', '1 Shelter Way'),
-(2, 'Owner',  'Jordan', 'Patel',   'jordan@whiskerhaven.org', '415-555-2000', '88 Meow Ave'),
-(3, 'Owner',  'Sam', 'Rivera',     'sam@fourpaws.net',     '206-555-3000', '740 Bark Blvd'),
-(4, 'Both',   'Mia', 'Thompson',   'mia.t@example.com',    '512-555-1111', '12 Oak Dr'),
-(5, 'Foster', 'Diego', 'Alvarez',  'diego.a@example.com',  '415-555-2222', '914 Pine St'),
-(6, 'Adopter','Priya', 'Singh',    'priya.s@example.com',  '206-555-3333', '401 5th Ave'),
-(7, 'Both',   'Chris', 'Johnson',  'chris.j@example.com',  '512-555-4444', '93 Maple Rd'),
-(8, 'Foster', 'Lila', 'Grant',     'lila.g@example.com',   '415-555-5555', '512 Mission St'),
-(9, 'Adopter','Noah', 'Kim',       'noah.k@example.com',   '206-555-6666', '221B Cedar Ln');""")
+# Insert Shelter
+cursor.execute("""
+INSERT INTO Shelter (name, email, phone, street1, street2, city, state, zip, account_id, date_shelter_added, no_kill, max_dogs, max_cats, dogs, cats)
+VALUES
+('Happy Tails Shelter', 'info@happytails.org', '555-1111', '321 Shelter Ln', NULL, 'Springfield', 'IL', '62704', 1, '2025-01-15', 1, 50, 30, 1, 1)
+""")
 
-cursor.execute(
-    """
--- Link shelter owners
-INSERT INTO ShelterOwner (shelter_id, account_id) VALUES
-(1,1),(2,2),(3,3);""")
+# Insert Animals
+cursor.execute("""
+INSERT INTO Animal (shelter_id, name, type, breed, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered)
+VALUES
+(1, 'Buddy', 'Dog', 'Labrador Retriever', 'Male', 1, 1, 'Available', '2025-02-05', 1, '2025-03-10', 1, 1),
+(1, 'Misty', 'Cat', 'Siamese', 'Female', 0, 1, 'Adopted', '2025-01-22', 1, '2025-02-15', 1, 1),
+(1, 'Rocky', 'Dog', 'German Shepherd', 'Male', 0, 0, 'In Shelter', '2025-03-01', 1, '2025-03-20', 1, 0)
+""")
 
-cursor.execute(
-    """
--- Animals
-INSERT INTO Animal (animal_id, shelter_id, type, sex, status, available_foster, available_adopt, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered) VALUES
-(101,1,'Dog','Male','Available',1,1,'2024-02-10T10:30:00',1,'2024-03-12',1,1),
-(102,1,'Cat','Female','Available',0,1,'2024-02-18T14:00:00',1,'2024-03-05',1,1),
-(103,1,'Dog','Female','Fostered',0,0,'2024-01-29T09:00:00',0,'2024-02-15',1,0),
-(104,1,'Dog','Male','Hold',0,0,'2024-03-08T11:45:00',1,'2024-03-20',0,0),
-(105,2,'Cat','Male','Available',1,1,'2024-03-01T13:20:00',1,'2024-03-10',1,1),
-(106,2,'Cat','Female','Available',1,1,'2024-03-02T16:05:00',0,'2024-03-12',1,0),
-(107,2,'Cat','Female','Fostered',0,0,'2024-02-20T08:10:00',1,'2024-03-01',1,1),
-(108,3,'Dog','Male','Available',1,1,'2023-12-15T15:30:00',1,'2024-01-20',1,1),
-(109,3,'Dog','Female','Available',1,1,'2024-01-10T12:00:00',0,'2024-02-05',1,0),
-(110,3,'Cat','Male','Available',1,1,'2024-02-05T17:25:00',1,'2024-03-07',1,1),
-(111,1,'Cat','Female','Adopted',0,0,'2023-12-28T10:00:00',1,'2024-01-15',1,1),
-(112,2,'Dog','Male','Available',1,1,'2024-03-10T09:40:00',0,'2024-03-18',0,0);""")
+# Insert Foster (Laura Kim fostering Buddy)
+cursor.execute("""
+INSERT INTO Foster (account_id, animal_id, shelter_id, other_pets, children, num_adults, notes, datetime_start, datetime_end)
+VALUES
+(3, 1, 1, 2, 1, 2, 'Very active foster family with fenced yard.', '2025-03-10', '2025-05-15')
+""")
 
-cursor.execute(
-    """
--- Foster placements
-INSERT INTO Fosters (foster_id, account_id, animal_id, shelter_id, other_pets, children, number_of_adults, notes, date_time_start, date_time_end) VALUES
-(1,4,103,1,1,0,2,'Experienced with senior dogs','2024-02-20T18:00:00',NULL),
-(2,5,107,2,0,1,1,'Quiet apartment; cat tree available','2024-03-03T10:00:00',NULL),
-(3,8,106,2,1,0,1,'Works from home','2024-03-05T09:00:00',NULL),
-(4,7,104,1,1,2,2,'Short-term medical hold','2024-03-15T12:00:00','2024-03-22T12:00:00'),
-(5,4,109,3,0,0,2,'Good yard space','2024-02-25T14:30:00',NULL);""")
+# Insert Adoption (James Miller adopted Misty)
+cursor.execute("""
+INSERT INTO Adoption (account_id, animal_id, fee_amount, fee_payed)
+VALUES
+(2, 2, 100, 100)
+""")
 
-cursor.execute(
-    """
--- Adoptions
-INSERT INTO Adoption (adoption_id, account_id, animal_id, fee_amount, fee_payed, date_adopted, date_returned) VALUES
-(1,6,111,125.00,1,'2024-01-20',NULL),
-(2,9,108,200.00,1,'2024-02-10',NULL),
-(3,4,105,90.00,1,'2024-03-12',NULL),
-(4,7,110,110.00,1,'2024-03-18',NULL);""")
+# Insert ShelterOwner (Emily Johnson owns the shelter)
+cursor.execute("""
+INSERT INTO ShelterOwner (shelter_id, account_id)
+VALUES
+(1, 1)
+""")
 
 conn.commit()
 

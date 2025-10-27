@@ -14,11 +14,14 @@ def get_db_connection():
 
 #@app.route("/") #houses login button to take you to /login, and also shows the list of animals mini profile, which you can click to view more 
 # https://stackoverflow.com/questions/21689364/method-not-allowed-flask-error-405 Fixed 405 error, didn't put GET in methods
+@app.route("/<int:shelterID>")
 @app.route("/index/<int:shelterID>", methods = ['GET', 'POST'])
 def main(shelterID):
     conn = get_db_connection()
-    animals = conn.execute(('SELECT * FROM Animal WHERE shelter_id = ?'), (shelterID)).fetchall()
-    return render_template('index.html', animals = animals)
+    shelterName = conn.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), shelterID).fetchone()
+    animals = conn.execute(('SELECT * FROM Animal WHERE shelter_id = ?'), shelterID).fetchall()
+    conn.close()
+    return render_template('index.html', animals = animals, shelterName = str(shelterName))
 
 # ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
 #---------------------------------------------------------------------------------------------------#
