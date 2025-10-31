@@ -1,10 +1,15 @@
+# https://stackoverflow.com/questions/21689364/method-not-allowed-flask-error-405 Fixed 405 error, didn't put GET in methods
+# Professor Bowe helped us because we were unable to get things working with the template. Turns out we were accidentally creating a new instance lol!
+# Template kept giving errors that were parameter related for the sql calls. Turns out you have to put a comma after even if there's nothing else so
+# it is still recognized as a tuple thanks to the google AI when I looked up the error I was getting.
+# I then had issues getting the template recognized and was checking the Flask tutorial we were provided and noticed he called his folder
+# templates. I looked it up and according to the AI, you have to call the folder with your pages templates for the path to be recognized.
 from flask import Flask, render_template
+from . import app
 import sqlite3
 import os
 
 currentdirectory = os.path.dirname(os.path.abspath(__file__))
-
-app = Flask(__name__)
 
 DATABASE = os.path.join(currentdirectory, "animal_shelter.db")
 
@@ -12,14 +17,12 @@ def get_db_connection():
     conn = sqlite3.connect(DATABASE)
     return conn
 
-#@app.route("/") #houses login button to take you to /login, and also shows the list of animals mini profile, which you can click to view more 
-# https://stackoverflow.com/questions/21689364/method-not-allowed-flask-error-405 Fixed 405 error, didn't put GET in methods
-@app.route("/<int:shelterID>")
+@app.route("/<int:shelterID>", methods = ['GET', 'POST'])
 @app.route("/index/<int:shelterID>", methods = ['GET', 'POST'])
-def main(shelterID):
+def main(shelterID = 0):
     conn = get_db_connection()
-    shelterName = conn.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), shelterID).fetchone()
-    animals = conn.execute(('SELECT * FROM Animal WHERE shelter_id = ?'), shelterID).fetchall()
+    shelterName = conn.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
+    animals = conn.execute(('SELECT * FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     return render_template('index.html', animals = animals, shelterName = str(shelterName))
 
@@ -69,9 +72,6 @@ def animal_edit():
 
 # button to link to adoption form, and shelter view
 
-
-
-
-if __name__ == "__main__":
-
-    app.run()
+# if __name__ == "__main__":
+#     print("at the bottom of api.py")
+#     app.run()

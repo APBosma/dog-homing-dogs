@@ -1,5 +1,7 @@
 from flask import Flask
 
-Website = Flask(__name__)
+app = Flask(__name__)
 
-from app import api
+from . import api
+
+print("in init")
