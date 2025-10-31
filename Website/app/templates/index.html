@@ -6,8 +6,8 @@
 <body>
     <div id="container">
         <header>
-            {% if shelterName %}
-                <p>{{ shelterName }}'s Animals</p>
+            {% if shelter %}
+                <p>{{ shelter['name'] }}'s Animals</p>
             {% else %}
                 <p>All Animals</p>
             {% endif %}
@@ -20,9 +20,9 @@
         <body>
             {% if animals %}
                 {% for animal in animals %}
-                    <div><p>{{ animal[0] }} 
-                        <b>{{ animal[1] }}, {{ animal[2] }}</b>
-                        <b>{{ animal[3] }}</b>
+                    <div><p>{{ animal['name'] }} 
+                        <b>{{ animal['type'] }}, {{ animal['breed'] }}</b>
+                        <b>{{ animal['sex'] }}</b>
                     </p></div>
                 {% endfor %}
             {% endif %}
