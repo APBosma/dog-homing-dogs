@@ -109,3 +109,20 @@ Estimate: 10 minutes
 Actual: 40 minutes
 Notes: I didn't think more things would be broken.
 Backfilled: No
+
+Date: 10/31/2025
+Start–End: 11:00 am - 1:30 pm
+Task: Fixed index API stuff
+Estimate: 1 hour
+Actual: 2.5 hours
+Notes: Attended office hours so I already knew a chunk of the hardware content covered. I also added a 
+wiki page for understanding the API.
+Backfilled: No
+
+Date: 10/31/2025
+Start–End: 6:30 pm - 7:30 pm
+Task: Implemented row_factory for readability and edited wiki
+Estimate: 30 minutes
+Actual: 1 hour
+Notes: Outlined everything API related in Discord channel.
+Backfilled: No
