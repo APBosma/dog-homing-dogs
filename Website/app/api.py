@@ -179,16 +179,15 @@ def get_db_connection():
 def main(shelterID = 0):
     conn = get_db_connection()
     cursor = conn.cursor()
-    print("Line 25")
-    everything = cursor.execute('SELECT * FROM Shelter').fetchall()
+    everything = cursor.execute(('SELECT name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
 
     for row in everything:
         print(row)
 
     shelterName = cursor.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
-    animals = cursor.execute(('SELECT * FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
+    animals = cursor.execute(('SELECT name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
-    return render_template('index.html', animals = animals, shelterName = str(shelterName))
+    return render_template('index.html', animals = animals, shelterName = shelterName[0])
 
 # ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
 #---------------------------------------------------------------------------------------------------#
