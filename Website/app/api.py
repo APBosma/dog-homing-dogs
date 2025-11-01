@@ -8,6 +8,7 @@
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
 from flask import Flask, render_template
 from . import app
+# app = Flask(__name__) If I find this line uncommented out I will find who did it and be upset. I won't do anything bad, but I will be sad.
 import sqlite3
 
 DATABASE = 'animal_shelter.db'
@@ -133,11 +134,11 @@ def preset():
 
     # Insert Animals
     cursor.execute("""
-    INSERT INTO Animal (shelter_id, name, type, breed, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered)
+    INSERT INTO Animal (shelter_id, animal_id, name, type, breed, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered)
     VALUES
-    (1, 'Buddy', 'Dog', 'Labrador Retriever', 'Male', 1, 1, 'Available', '2025-02-05', 1, '2025-03-10', 1, 1),
-    (1, 'Misty', 'Cat', 'Siamese', 'Female', 0, 1, 'Adopted', '2025-01-22', 1, '2025-02-15', 1, 1),
-    (1, 'Rocky', 'Dog', 'German Shepherd', 'Male', 0, 0, 'In Shelter', '2025-03-01', 1, '2025-03-20', 1, 0)
+    (1, 1, 'Buddy', 'Dog', 'Labrador Retriever', 'Male', 1, 1, 'Available', '2025-02-05', 1, '2025-03-10', 1, 1),
+    (1, 2, 'Misty', 'Cat', 'Siamese', 'Female', 0, 1, 'Adopted', '2025-01-22', 1, '2025-02-15', 1, 1),
+    (1, 3, 'Rocky', 'Dog', 'German Shepherd', 'Male', 0, 0, 'In Shelter', '2025-03-01', 1, '2025-03-20', 1, 0)
     """)
 
     # Insert Foster (Laura Kim fostering Buddy)
@@ -165,7 +166,8 @@ def preset():
 
     conn.close()
 
-
+# (COMPLETED) HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME #
+#---------------------------------------------------------------------------------------------------#
 
 @app.route("/<int:shelterID>", methods = ['GET', 'POST'])
 @app.route("/index/<int:shelterID>", methods = ['GET', 'POST'])
@@ -175,14 +177,30 @@ def main(shelterID = 0):
     cursor = conn.cursor()
     shelter = []
     shelter = cursor.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
-    animals = cursor.execute(('SELECT name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
+    animals = cursor.execute(('SELECT animal_id, name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     if not shelter:
         return render_template('index.html', animals = animals)
     
     return render_template('index.html', animals = animals, shelter = shelter)
 
-# ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
+
+
+# (COMPLETED) SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL #
+#---------------------------------------------------------------------------------------------------#
+@app.route("/animal/<int:animalID>", methods = ['GET', 'POST'])
+def index_by_id(animalID = 0):
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    animal = cursor.execute(('SELECT name, type, breed, animal_id, sex FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
+    conn.close()
+    if not animal:
+       return "Animal not found."
+    return render_template("animal.html", animal=animal)
+
+
+# (NOT COMPLETED) ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
 #---------------------------------------------------------------------------------------------------#
 
 #create a new account
@@ -209,25 +227,14 @@ def get_account(account_id):
 
 # show animal mini bio - if foster, we can have them be able to create and edit pet accounts, if they are with a shelter, same thing. can only manipulate the pets they added and removed (shelters must have approved users to manipulate thier database)
     
-# Animal - Animal - Animal - Animal - Animal - Animal - Animal - Animal - Animal - Animal - Animal #
+# Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal #
 #---------------------------------------------------------------------------------------------------#
 
-#main view - shows list of animals mini bio - sortable
-@app.route("/view")
-def animal_view():
-    return ("entire database of animals, sortable by location/distance")
-    
-#detailed animal info
-@app.route("/animal/<int:animal_id>")
-def animal_info():
-    return ("shows detailed animal information")
-
-@app.route("/animal/<int:animal_id>/edit", methods = ["GET"])
+@app.route("/index/animal/<int:animal_id>/edit", methods = ["GET"])
 def animal_edit():
     return ("function to edit animal info")
 
 # button to link to adoption form, and shelter view
 
-# if __name__ == "__main__":
-#     print("at the bottom of api.py")
-#     app.run()
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)

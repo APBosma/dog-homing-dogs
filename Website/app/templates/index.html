@@ -2,6 +2,16 @@
 <html>
 <head>
     <title>All Animals</title>
+    <style>
+        button {
+            padding: 6px 12px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #navbar a {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
@@ -12,15 +22,21 @@
                 <p>All Animals</p>
             {% endif %}
         </header>
+
         <nav id="navbar">
-            <a href="index.html">All Animals</a>
+            <a href="/index/1">All Animals</a>
             <a href="#">Something Else, IDK</a>
         </nav>
 
         <body>
             {% if animals %}
                 {% for animal in animals %}
-                    <div><p>{{ animal['name'] }} 
+                    
+                    <div><p>{{ animal['name'] }}</p></div>
+                    <a href="/animal/{{ animal['animal_id'] }}">
+                        <button type="button">Meet {{ animal['name'] }}!</button>
+                    </a> 
+                    <div><p></p>
                         <b>{{ animal['type'] }}, {{ animal['breed'] }}</b>
                         <b>{{ animal['sex'] }}</b>
                     </p></div>
@@ -32,3 +48,5 @@
     </div>
 </body>
 </html>
+
+<!--source for button shtuff https://www.w3schools.com/tags/tag_button.asp-->
