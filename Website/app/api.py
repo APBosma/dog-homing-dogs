@@ -7,7 +7,8 @@
 # Found this (https://www.geeksforgeeks.org/python/how-to-build-a-web-app-using-flask-and-sqlite-in-python/#) when trying to figure out why the animal 
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
 from flask import Flask, render_template
-app = Flask(__name__)
+from . import app
+# app = Flask(__name__) If I find this line uncommented out I will find who did it and be upset. I won't do anything bad, but I will be sad.
 import sqlite3
 
 DATABASE = 'animal_shelter.db'
@@ -187,7 +188,7 @@ def main(shelterID = 0):
 
 # (COMPLETED) SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL #
 #---------------------------------------------------------------------------------------------------#
-@app.route("/index/animal/<int:animalID>", methods = ['GET', 'POST'])
+@app.route("/animal/<int:animalID>", methods = ['GET', 'POST'])
 def index_by_id(animalID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
