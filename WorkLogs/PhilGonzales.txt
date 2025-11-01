@@ -99,3 +99,10 @@ Actual: 3 hours
 Notes: Ended up doing basically nothing because the database keeps saying it's missing columns. i dont know what to do, could not find any help online. 
 
 -------------- Week 7 report ^
+
+Date 11/1/2025
+Start–End: 9:00-1:52
+Task: Added api to view a single animal, added the html. 
+Estimate: -
+Actual: 6 hours
+Notes: should be easier to add the rest of the api now that we have a few done to base the rest off of. the navigation will be the hard part, it was giving me a lot of issues loading the .html files. 
