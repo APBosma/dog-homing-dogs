@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{animal['name']}}</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            {% if animal %}
+                <p>Meet {{ animal['name'] }}!</p>
+            {% else %}
+                <p>No Animal Found</p>
+            {% endif %}
+        </header>
+        <nav id="navbar">
+            <a href="index.html">All Animals</a>
+            <a href="index.html">Back to Shelter</a>
+            <a href="#">Something Else, IDK</a>
+        </nav>
+
+        <body>
+            {% if animal %}
+                <div><p>Name: {{ animal['name'] }} 
+                    <b>Status: {{ animal['status'] }}</b>
+                    <b>Type: {{ animal['type'] }}, Breed: {{ animal['breed'] }}</b>
+                    <b>Sex: {{ animal['sex'] }}</b>
+                    <b>Date Arrived: {{ animal['date_time_arrived'] }}</b>
+                    <b>Vaccines (1 means yes, 0 means no): {{ animal['vaccines'] }}</b>
+                    <b>Spayed/Neutered (1 means yes, 0 means no): {{ animal['spayed_neutered'] }}</b>
+                    
+                </p></div>
+            {% endif %}
+        </body>
+        <footer>Work in progress.</a></footer>
+    </div>
+</body>
+</html>
