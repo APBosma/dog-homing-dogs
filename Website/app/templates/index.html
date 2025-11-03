@@ -24,7 +24,7 @@
         </header>
 
         <nav id="navbar">
-            <a href="/index/1">All Animals</a>
+            <a href = "{{ indexLink }}">Back to Shelter</a>
             <a href="#">Something Else, IDK</a>
         </nav>
 
@@ -33,7 +33,7 @@
                 {% for animal in animals %}
                     
                     <div><p>{{ animal['name'] }}</p></div>
-                    <a href="/animal/{{ animal['animal_id'] }}">
+                    <a href="/animal/{{ shelter['shelter_id'] }}/{{ animal['animal_id'] }}">
                         <button type="button">Meet {{ animal['name'] }}!</button>
                     </a> 
                     <div><p></p>
