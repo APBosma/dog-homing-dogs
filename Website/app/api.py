@@ -8,7 +8,6 @@
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
 from flask import Flask, render_template
 from . import app
-# app = Flask(__name__) If I find this line uncommented out I will find who did it and be upset. I won't do anything bad, but I will be sad.
 import sqlite3
 
 DATABASE = 'animal_shelter.db'
@@ -169,35 +168,47 @@ def preset():
 # (COMPLETED) HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME #
 #---------------------------------------------------------------------------------------------------#
 
-@app.route("/<int:shelterID>", methods = ['GET', 'POST'])
-@app.route("/index/<int:shelterID>", methods = ['GET', 'POST'])
+"""
+Routes: /int, /index/int
+Methods: GET, POST
+Template: index.html
+Returns: List of all animals at a shelter
+"""
+@app.route("/<int:shelterID>", methods = ['GET'])
+@app.route("/index/<int:shelterID>", methods = ['GET'])
 def main(shelterID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     shelter = []
-    shelter = cursor.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
+    shelter = cursor.execute(('SELECT name, shelter_id FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
     animals = cursor.execute(('SELECT animal_id, name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     if not shelter:
-        return render_template('index.html', animals = animals)
-    
-    return render_template('index.html', animals = animals, shelter = shelter)
+        return "No shelter found."
+    return render_template('index.html', animals = animals, shelter = shelter, indexLine = "/index/" + str(shelterID))
 
 
 
 # (COMPLETED) SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL - SINGLE ANIMAL #
 #---------------------------------------------------------------------------------------------------#
-@app.route("/animal/<int:animalID>", methods = ['GET', 'POST'])
-def index_by_id(animalID = 0):
+"""
+Routes: /animal/int
+Methods: GET, POST
+Template: animal.html
+Returns: Returns the information for a single animal
+"""
+@app.route("/animal/<int:shelterID>/<int:animalID>", methods = ['GET'])
+def index_by_id(shelterID = 1, animalID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     animal = cursor.execute(('SELECT name, type, breed, animal_id, sex FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
     conn.close()
+    URL = "/index/" + str(shelterID)
     if not animal:
        return "Animal not found."
-    return render_template("animal.html", animal=animal)
+    return render_template("animal.html", animal=animal, indexLink = URL)
 
 
 # (NOT COMPLETED) ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
