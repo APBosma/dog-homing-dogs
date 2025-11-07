@@ -169,13 +169,12 @@ def preset():
 #---------------------------------------------------------------------------------------------------#
 
 """
-Routes: /int, /index/int
+Routes: /home/int
 Methods: GET
-Template: index.html
+Template: home.html
 Returns: List of all animals at a shelter
 """
-@app.route("/<int:shelterID>", methods = ['GET'])
-@app.route("/index/<int:shelterID>", methods = ['GET'])
+@app.route("/home/<int:shelterID>", methods = ['GET'])
 def main(shelterID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
@@ -186,7 +185,7 @@ def main(shelterID = 0):
     conn.close()
     if not shelter:
         return "No shelter found."
-    return render_template('index.html', animals = animals, shelter = shelter, indexLine = "/index/" + str(shelterID))
+    return render_template('home.html', animals = animals, shelter = shelter, indexLine = "/home/" + str(shelterID))
 
 
 
@@ -205,10 +204,9 @@ def index_by_id(shelterID = 1, animalID = 0):
     cursor = conn.cursor()
     animal = cursor.execute(('SELECT name, type, breed, animal_id, sex FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
     conn.close()
-    URL = "/index/" + str(shelterID)
     if not animal:
        return "Animal not found."
-    return render_template("animal.html", animal=animal, indexLink = URL)
+    return render_template("animal.html", animal=animal, indexLink = "/home/" + str(shelterID))
 
 
 # (NOT COMPLETED) ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
