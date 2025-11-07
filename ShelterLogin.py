@@ -10,6 +10,9 @@ werkzeug.security used for hashing and checking passwords
 
 WILL STILL NEED: htmls for register, login, and userHomePage
 
+Citations:
+I looked up methods to log into accounts using Flask and it gave me flask_login and the imports I used, what they do, and how to use them.
+When I did this, it also gave me the werkzeug.security too, so I implimented it. 
 """
 
 from flask import Flask, render_template, request, redirect, url_for
@@ -51,8 +54,6 @@ class User(UserMixin): #represents logged in user. UserMixin is used so Flask-Lo
 def load_user(user_id):
     #connects the user id to the user
     return User.get(user_id)
-
-#Routes
 
 #registration; displays form in both GET and POST
 @app.route('/register', methods=['GET', 'POST'])
@@ -111,7 +112,7 @@ def dashboard():
     return f"Welcome, {current_user.username}!"
 
 if __name__ == '__main__':
-    # Initializes database
+    #initializes the database
     conn = sqlite3.connect('login.db')
     cursor = conn.cursor()
     cursor.execute('''
@@ -124,5 +125,6 @@ if __name__ == '__main__':
 
     conn.commit()
     conn.close()
+
 
     app.run(debug=True)
