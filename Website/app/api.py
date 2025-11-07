@@ -170,7 +170,7 @@ def preset():
 
 """
 Routes: /int, /index/int
-Methods: GET, POST
+Methods: GET
 Template: index.html
 Returns: List of all animals at a shelter
 """
@@ -194,7 +194,7 @@ def main(shelterID = 0):
 #---------------------------------------------------------------------------------------------------#
 """
 Routes: /animal/int
-Methods: GET, POST
+Methods: GET
 Template: animal.html
 Returns: Returns the information for a single animal
 """
