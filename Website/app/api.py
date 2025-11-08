@@ -167,6 +167,17 @@ def preset():
 
     conn.close()
 
+# (COMPLETED) INDEX #
+#---------------------------------------------------------------------------------------------------#
+@app.route("/")
+@app.route("/index")
+def index():
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    shelters = cursor.execute('SELECT name, shelter_id, street1, street2, city, state, zip FROM Shelter').fetchall()
+    return render_template('index.html', shelters = shelters)
+
 # (COMPLETED) HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME #
 #---------------------------------------------------------------------------------------------------#
 

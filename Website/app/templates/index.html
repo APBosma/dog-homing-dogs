@@ -2,16 +2,6 @@
 <html>
 <head>
     <title>All Shelters</title>
-    <style>
-        button {
-            padding: 6px 12px;
-            margin: 5px;
-            cursor: pointer;
-        }
-        #navbar a {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <div id="container">
@@ -20,21 +10,20 @@
         </header>
 
         <nav id="navbar">
-            <a href = "{{ indexLink }}">Back to Shelter</a>
-            <a href="#">Something Else, IDK</a>
+            <a href = "login.html">Login</a>
+            <a href="signup.html">Sign Up</a>
         </nav>
 
         <body>
-=            {% for shelter in shelters %}
-                
-                <div><p>{{ animal['name'] }}</p></div>
-                <a href="/animal/{{ shelter['shelter_id'] }}/{{ animal['animal_id'] }}">
-                    <button type="button">Meet {{ animal['name'] }}!</button>
-                </a> 
-                <div><p></p>
-                    <b>{{ animal['type'] }}, {{ animal['breed'] }}</b>
-                    <b>{{ animal['sex'] }}</b>
-                </p></div>
+            {% for shelter in shelters %}
+                <a href="/home/{{ shelter['shelter_id'] }}" id = "shelter-info">
+                    <h2>{{ shelter['name'] }}</h2>
+                    <p>{{ shelter['street1'] }}</p>
+                    {% if shelter['street2'] %}
+                        <p>{{ shelter['street2'] }}</p>
+                    {% endif %}
+                    <p>{{ shelter['city'] }}, {{ shelter['state'] }} {{ shelter['zip'] }}</p>
+                </a>
             {% endfor %}
         </body>
 
@@ -42,5 +31,3 @@
     </div>
 </body>
 </html>
-
-<!--source for button shtuff https://www.w3schools.com/tags/tag_button.asp-->
