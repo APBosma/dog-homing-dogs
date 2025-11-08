@@ -169,6 +169,12 @@ def preset():
 
 # (COMPLETED) INDEX #
 #---------------------------------------------------------------------------------------------------#
+"""
+Routes: /, /index
+Methods: GET
+Template: index..html
+Returns: Lists all shelters with their address, clicking the shelter takes you to the shelter's home page
+"""
 @app.route("/")
 @app.route("/index")
 def index():
