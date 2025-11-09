@@ -6,6 +6,8 @@
 # templates. I looked it up and according to the AI, you have to call the folder with your pages templates for the path to be recognized.
 # Found this (https://www.geeksforgeeks.org/python/how-to-build-a-web-app-using-flask-and-sqlite-in-python/#) when trying to figure out why the animal 
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
+# I had seen previous mentions of a form with HTML so I looked up "HTML form" and used W3 for my form syntax since they're my go-to for
+# documentation. This was used for login and sign up.
 from flask import Flask, render_template
 from . import app
 import sqlite3
@@ -165,17 +167,33 @@ def preset():
 
     conn.close()
 
+# (COMPLETED) INDEX #
+#---------------------------------------------------------------------------------------------------#
+"""
+Routes: /, /index
+Methods: GET
+Template: index..html
+Returns: Lists all shelters with their address, clicking the shelter takes you to the shelter's home page
+"""
+@app.route("/")
+@app.route("/index")
+def index():
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    shelters = cursor.execute('SELECT name, shelter_id, street1, street2, city, state, zip FROM Shelter').fetchall()
+    return render_template('index.html', shelters = shelters)
+
 # (COMPLETED) HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME #
 #---------------------------------------------------------------------------------------------------#
 
 """
-Routes: /int, /index/int
-Methods: GET, POST
-Template: index.html
+Routes: /home/int
+Methods: GET
+Template: home.html
 Returns: List of all animals at a shelter
 """
-@app.route("/<int:shelterID>", methods = ['GET'])
-@app.route("/index/<int:shelterID>", methods = ['GET'])
+@app.route("/home/<int:shelterID>", methods = ['GET'])
 def main(shelterID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
@@ -186,7 +204,7 @@ def main(shelterID = 0):
     conn.close()
     if not shelter:
         return "No shelter found."
-    return render_template('index.html', animals = animals, shelter = shelter, indexLine = "/index/" + str(shelterID))
+    return render_template('home.html', animals = animals, shelter = shelter, indexLine = "/home/" + str(shelterID))
 
 
 
@@ -194,7 +212,7 @@ def main(shelterID = 0):
 #---------------------------------------------------------------------------------------------------#
 """
 Routes: /animal/int
-Methods: GET, POST
+Methods: GET
 Template: animal.html
 Returns: Returns the information for a single animal
 """
@@ -205,10 +223,9 @@ def index_by_id(shelterID = 1, animalID = 0):
     cursor = conn.cursor()
     animal = cursor.execute(('SELECT name, type, breed, animal_id, sex FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
     conn.close()
-    URL = "/index/" + str(shelterID)
     if not animal:
        return "Animal not found."
-    return render_template("animal.html", animal=animal, indexLink = URL)
+    return render_template("animal.html", animal=animal, indexLink = "/home/" + str(shelterID))
 
 
 # (NOT COMPLETED) ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <p>Sign Up</p>
+        </header>
+        <nav id="navbar">
+            <a href = "{{ indexLink }}">Back to Shelter</a>
+            <a href="#">Something Else, IDK</a>
+        </nav>
+
+        <body>
+            <form action="/signup" method="POST">
+                <br>
+                <label for = "username">Username:</label><br>
+                    <input type = "text" id = "useranme" name = "username" maxlength="50"><br>
+                <label for = "password">Password:</label><br>
+                    <input type = "password" id = "password" name = "password" maxlength="50"><br>
+                <label for = "repassword">Re-Type Password:</label><br>
+                    <input type = "password" id = "repassword" name = "repassword" maxlength="50"><br>
+                <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email"><br>
+                <label for="phone">Phone Number:</label><br>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
+                <label for = "shelterChoice">Choose your shelter or put "Shelter Owner" if you are a shelter owner looking to add yours:</label><br>
+                    <select id = "shelterChoice" name = "shelterChoice">
+                        <option value = "shelterOwner">Shelter Owner</option>
+                        {% for shelter in shelters %}
+                            <option value = "{{ shelter['shelter_id'] }}"> {{ shelter['name'] }}</option>
+                        {% endfor %}
+                    </select><br>
+                <br>
+                <input type="submit" value="Sign Up">
+            </form>
+            {% if error %}
+                <p style="color: red;">{{ error }}</p>
+            {% endif %}
+        </body>
+        <footer>Work in progress.</a></footer>
+    </div>
+</body>
+</html>

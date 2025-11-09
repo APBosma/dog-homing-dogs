@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <title>All Animals</title>
+    <style>
+        button {
+            padding: 6px 12px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #navbar a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            {% if shelter %}
+                <p>{{ shelter['name'] }}'s Animals</p>
+            {% else %}
+                <p>All Animals</p>
+            {% endif %}
+        </header>
+
+        <nav id="navbar">
+            <a href = "{{ indexLink }}">Back to Shelter</a>
+            <a href="#">Something Else, IDK</a>
+        </nav>
+
+        <body>
+            {% if animals %}
+                {% for animal in animals %}
+                    
+                    <div><p>{{ animal['name'] }}</p></div>
+                    <a href="/animal/{{ shelter['shelter_id'] }}/{{ animal['animal_id'] }}">
+                        <button type="button">Meet {{ animal['name'] }}!</button>
+                    </a> 
+                    <div><p></p>
+                        <b>{{ animal['type'] }}, {{ animal['breed'] }}</b>
+                        <b>{{ animal['sex'] }}</b>
+                    </p></div>
+                {% endfor %}
+            {% endif %}
+        </body>
+
+        <footer>Work in progress.</a></footer>
+    </div>
+</body>
+</html>
+
+<!--source for button shtuff https://www.w3schools.com/tags/tag_button.asp-->
