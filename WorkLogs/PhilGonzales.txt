@@ -106,3 +106,19 @@ Task: Added api to view a single animal, added the html.
 Estimate: -
 Actual: 6 hours
 Notes: should be easier to add the rest of the api now that we have a few done to base the rest off of. the navigation will be the hard part, it was giving me a lot of issues loading the .html files. 
+
+-------------- Week 8 report ^
+
+Start–End: *about an hour and a half*
+Task: met with matt and emilio twice to go over what we had left 
+Estimate: -
+Actual: 1.5 hours
+Notes:
+
+Date 11/9/2025
+Start–End: 7:30-8:05
+Task: Added api to view a single animal, added the html. 
+Estimate: -
+Actual: 35 minutes
+Notes:
+-------------- Week 9 report ^

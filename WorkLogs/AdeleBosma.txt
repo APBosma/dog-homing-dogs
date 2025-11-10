@@ -126,3 +126,19 @@ Estimate: 30 minutes
 Actual: 1 hour
 Notes: Outlined everything API related in Discord channel.
 Backfilled: No
+
+Date: 11/07/2025
+Start–End: 10:30 am - 12:00 pm
+Task: Create HTML for login and signup for Matt
+Estimate: 30 minutes
+Actual: 1.5 hour
+Notes:
+Backfilled: No
+
+Date: 11/08/2025
+Start–End: 10:15 am - 11:38 pm
+Task: Made a new index.html
+Estimate: 1.5 hour
+Actual: 1.25 hour
+Notes: PR #5
+Backfilled: No

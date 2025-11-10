@@ -145,54 +145,58 @@ def preset():
     cursor.execute("""
     INSERT INTO Animal (shelter_id, animal_id, name, type, breed, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered)
     VALUES
+    (1, 1, 'Buddy', 'Dog', 'Labrador Retriever', 'Male', 1, 1, 'Available', '2025-02-05', 1, '2025-03-10', 1, 1),
+    (1, 2, 'Misty', 'Cat', 'Siamese', 'Female', 0, 1, 'Adopted', '2025-01-22', 1, '2025-02-15', 1, 1),
+    (1, 3, 'Rocky', 'Dog', 'German Shepherd', 'Male', 0, 0, 'In Shelter', '2025-03-01', 1, '2025-03-20', 1, 0),
     (2, 4, 'Luna', 'Cat', 'Maine Coon', 'Female', 1, 0, 'Fostered', '2025-02-18', 1, '2025-03-22', 1, 1),
     (2, 5, 'Max', 'Dog', 'Golden Retriever', 'Male', 0, 1, 'Adopted', '2025-01-12', 1, '2025-02-01', 1, 1),
-    (3, 6, 'Daisy', 'Dog', 'Beagle', 'Female', 1, 0, 'Fostered', '2025-02-25', 0, '2025-01-12', 1, 0),
+    (3, 6, 'Daisy', 'Dog', 'Beagle', 'Female', 1, 0, 'Fostered', '2025-02-25', 0, NULL, 1, 0),
     (3, 7, 'Shadow', 'Cat', 'Domestic Shorthair', 'Male', 0, 0, 'In Shelter', '2025-03-15', 1, '2025-03-28', 1, 1),
     (4, 8, 'Bella', 'Dog', 'Pit Bull Mix', 'Female', 0, 1, 'Adopted', '2025-01-30', 1, '2025-02-20', 1, 1),
     (4, 9, 'Oliver', 'Cat', 'Bengal', 'Male', 1, 0, 'Fostered', '2025-03-03', 1, '2025-03-25', 1, 0),
-    (5, 10, 'Coco', 'Dog', 'Poodle', 'Female', 0, 0, 'In Shelter', '2025-02-01', 0, '2025-01-12', 1, 0),
+    (5, 10, 'Coco', 'Dog', 'Poodle', 'Female', 0, 0, 'In Shelter', '2025-02-01', 0, NULL, 1, 0),
     (5, 11, 'Milo', 'Cat', 'Tabby', 'Male', 0, 1, 'Adopted', '2025-01-15', 1, '2025-02-17', 1, 1),
     (6, 12, 'Zeus', 'Dog', 'Husky', 'Male', 1, 0, 'Fostered', '2025-03-11', 1, '2025-03-25', 1, 0),
-    (6, 13, 'Willow', 'Cat', 'Persian', 'Female', 0, 0, 'In Shelter', '2025-02-26', 0,'2025-01-12', 0, 0)
+    (6, 13, 'Willow', 'Cat', 'Persian', 'Female', 0, 0, 'In Shelter', '2025-02-26', 0, NULL, 0, 0)
     """)
 
-    # # Insert Foster (Laura Kim fostering Buddy)
-    # cursor.execute("""
-    # INSERT INTO Foster (account_id, animal_id, shelter_id, other_pets, children, num_adults, notes, datetime_start, datetime_end)
-    # VALUES
-    # (3, 1, 1, 2, 1, 2, 'Very active foster family with fenced yard.', '2025-03-10', '2025-05-15'),
-    # (4, 2, 1, 0, 0, 1, 'Single adult with quiet home. No other pets.', '2025-01-05', '2025-02-20'),
-    # (5, 3, 2, 1, 1, 2, 'Family has small dog, good with cats.', '2025-04-01', '2025-04-30'),
-    # (6, 1, 3, 3, 0, 2, 'Experienced foster home, multiple past fosters.', '2025-06-10', '2025-07-22'),
-    # (7, 4, 2, 0, 2, 3, 'Home-school family, someone is always home.', '2025-02-15', '2025-03-29'),
-    # (8, 5, 3, 2, 0, 1, 'Quiet retired foster, fenced yard and dog door.', '2025-03-01', '2025-04-15'),
-    # (9, 6, 1, 0, 0, 1, 'First-time foster, small apartment.', '2025-05-20', '2025-06-10'),
-    # (10, 2, 2, 1, 2, 2, 'Animal-loving household with teens, energetic dog.', '2025-01-20', '2025-03-05')
-    # """)
+    # Insert Foster (Laura Kim fostering Buddy)
+    cursor.execute("""
+    INSERT INTO Foster (account_id, animal_id, shelter_id, other_pets, children, num_adults, notes, datetime_start, datetime_end)
+    VALUES
+    (3, 1, 1, 2, 1, 2, 'Very active foster family with fenced yard.', '2025-03-10', '2025-05-15'),
+    (4, 2, 1, 0, 0, 1, 'Single adult with quiet home. No other pets.', '2025-01-05', '2025-02-20'),
+    (5, 3, 2, 1, 1, 2, 'Family has small dog, good with cats.', '2025-04-01', '2025-04-30'),
+    (6, 1, 3, 3, 0, 2, 'Experienced foster home, multiple past fosters.', '2025-06-10', '2025-07-22'),
+    (7, 4, 2, 0, 2, 3, 'Home-school family, someone is always home.', '2025-02-15', '2025-03-29'),
+    (8, 5, 3, 2, 0, 1, 'Quiet retired foster, fenced yard and dog door.', '2025-03-01', '2025-04-15'),
+    (9, 6, 1, 0, 0, 1, 'First-time foster, small apartment.', '2025-05-20', '2025-06-10'),
+    (10, 2, 2, 1, 2, 2, 'Animal-loving household with teens, energetic dog.', '2025-01-20', '2025-03-05')
+    """)
 
-    # # Insert Adoption (James Miller adopted Misty)
-    # cursor.execute("""
-    # INSERT INTO Adoption (account_id, animal_id, fee_amount, fee_payed)
-    # VALUES
-    # (2, 2, 100, 100),
-    # (2, 1, 150, 150),
-    # (2, 3, 50, 50),
-    # (2, 2, 10, 10),
-    # (2, 4, 100, 100),
-    # (2, 6, 50, 50),
-    # (2, 2, 60, 60)
-    # """)
+    # Insert Adoption (James Miller adopted Misty)
+    cursor.execute("""
+    INSERT INTO Adoption (account_id, animal_id, fee_amount, fee_payed)
+    VALUES
+    (2, 2, 100, 100),
+    (2, 1, 150, 150),
+    (2, 3, 50, 50),
+    (2, 2, 10, 10),
+    (2, 4, 100, 100),
+    (2, 6, 50, 50),
+    (2, 2, 60, 60)
+    """)
 
-    # # Insert ShelterOwner (Emily Johnson owns the shelter)
-    # cursor.execute("""
-    # INSERT INTO ShelterOwner (shelter_id, account_id)
-    # VALUES
-    # (2,4),
-    # (3,6),
-    # (4,7),
-    # (5,8)
-    # """)
+    # Insert ShelterOwner (Emily Johnson owns the shelter)
+    cursor.execute("""
+    INSERT INTO ShelterOwner (shelter_id, account_id)
+    VALUES
+    (1, 1),
+    (2,4),
+    (3,6),
+    (4,7),
+    (5,8)
+    """)
 
     conn.commit()
 

@@ -41,5 +41,14 @@ Created our table using the Create Demo from class.
 Estimate: 1.5 hours
 Actual: 2 hours
 
+11/5/25
+7:30 - 10:30
+Worked on the login API.
+Estimate: 2 hrs
+Actual: 3 hrs
 
-
+11/8/25
+8:00 - 9:00
+Implemented the login API into our main API
+Estimate: 30 mins
+Actual: 1 hr
