@@ -29,19 +29,24 @@ nav a:hover {
 
 main {
     padding: 1%;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #grid {
     display:grid;
     grid-template-columns: auto auto auto auto;
+    gap: 10px;
 }
 
 #grid a {
+    color: black;
+    text-decoration:none;
     background-color: lightgrey;
     padding: 5px 15px;
 }
 
 footer {
-    background-color: #cad2c5;
+    background-color: #84a98c;
     padding: 10px 1%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
