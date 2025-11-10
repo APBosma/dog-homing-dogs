@@ -7,7 +7,7 @@
 # Found this (https://www.geeksforgeeks.org/python/how-to-build-a-web-app-using-flask-and-sqlite-in-python/#) when trying to figure out why the animal 
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
 # I had seen previous mentions of a form with HTML so I looked up "HTML form" and used W3 for my form syntax since they're my go-to for
-# documentation. This was used for login and sign up.
+# documentation. This was used for login and sign up
 
 """
 Citations for login and registration:
