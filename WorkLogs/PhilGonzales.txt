@@ -122,3 +122,10 @@ Estimate: -
 Actual: 35 minutes
 Notes:
 -------------- Week 9 report ^
+
+Date 11/14/2025
+Start–End: 12:30-1:39
+Task:Tried to run the thing to see what we have left, but it wont work. trying to debug.
+Estimate: -
+Actual: 1 hour
+Notes: import . is throwing an error, I can get it to run if I get rid of it and make app = "__name__" allowing flask to run, but it wont bring up any of the pages. unsure what happened, this was working a few weeks ago. 
