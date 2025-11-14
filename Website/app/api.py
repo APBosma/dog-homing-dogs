@@ -14,6 +14,7 @@ import sqlite3
 
 DATABASE = 'animal_shelter.db'
 
+
 def preset():
     conn = sqlite3.connect("animal_shelter.db")
     cursor = conn.cursor()

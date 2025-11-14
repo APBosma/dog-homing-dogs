@@ -1,6 +1,9 @@
 <!doctype html>
 <html>
 <head>
+    <!-- Looked up "flask with render template how to show CSS" on google and the AI showed me that I had to move the 
+    CSS file into a folder named static and to put this line in my HTML code. -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <title>All Shelters</title>
 </head>
 <body>
@@ -14,9 +17,10 @@
             <a href="signup.html">Sign Up</a>
         </nav>
 
-        <body>
+        <main>
+            <div id = "grid">
             {% for shelter in shelters %}
-                <a href="/home/{{ shelter['shelter_id'] }}" id = "shelter-info">
+                <a href="/home/{{ shelter['shelter_id'] }}">
                     <h2>{{ shelter['name'] }}</h2>
                     <p>{{ shelter['street1'] }}</p>
                     {% if shelter['street2'] %}
@@ -25,7 +29,8 @@
                     <p>{{ shelter['city'] }}, {{ shelter['state'] }} {{ shelter['zip'] }}</p>
                 </a>
             {% endfor %}
-        </body>
+            </div>
+        </main>
 
         <footer>Work in progress.</a></footer>
     </div>
