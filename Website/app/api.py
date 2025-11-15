@@ -8,12 +8,33 @@
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
 # I had seen previous mentions of a form with HTML so I looked up "HTML form" and used W3 for my form syntax since they're my go-to for
 # documentation. This was used for login and sign up.
-from flask import Flask, render_template
-from . import app
+
+"""
+Citations for login and registration:
+I looked up methods to log into accounts using Flask and it gave me flask_login and the imports I used, what they do, and how to use them.
+When I did this, it also gave me the werkzeug.security too, so I implimented it as well.
+I looked up what UserMixin does and how to implement it.
+With the registration and login routes, I knew how to organize them, but I did have to look up small issues I had like the the request methods.
+I also looked at previously made portions of the API and implemented some of the calls that way.
+"""
+
+
+from flask import Flask, request, redirect, url_for, render_template
+#from . import app
+app = Flask(__name__)
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
-DATABASE = 'animal_shelter.db'
+#used by Flask to securely sign session cookies
+app.config['SECRET_KEY'] = 'secret_key' #replace with secret key
 
+#manages login session
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login' #if a user tries to access a protected route, directs them to login
+
+DATABASE = 'animal_shelter.db'
 
 def preset():
     conn = sqlite3.connect("animal_shelter.db")
@@ -115,6 +136,15 @@ def preset():
     )
     """)
 
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS login (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        type TEXT NOT NULL CHECK(type IN ('shelter', 'owner'))
+    )
+    """)
+
     conn.commit()
 
     # Insert Accounts (some are adopters, fosters, shelter staff)
@@ -202,6 +232,37 @@ def preset():
 
     conn.close()
 
+class User(UserMixin): #represents logged in user. UserMixin is used so Flask-Login can handle the authentification automatically
+    def __init__(self, id, username, password, type):
+        self.id = id
+        self.username = username
+        self.password = password
+        self.type = type
+
+    #looks up a user by id
+    @staticmethod
+    def get(user_id):
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, username, password, type FROM login WHERE id = ?", (user_id,))
+        user_data = cursor.fetchone()
+        conn.close()
+        if user_data:
+            #returns user if found
+            return User(user_data[0], user_data[1], user_data[2], user_data[3])
+        return None
+
+#loads the current user from the session
+@login_manager.user_loader
+def load_user(user_id):
+    #connects the user id to the user
+    return User.get(user_id)
+
+def get_db_connection():
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    return conn
+
 # (COMPLETED) INDEX #
 #---------------------------------------------------------------------------------------------------#
 """
@@ -221,25 +282,26 @@ def index():
 
 # (COMPLETED) HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME - HOME #
 #---------------------------------------------------------------------------------------------------#
-
 """
 Routes: /home/int
 Methods: GET
 Template: home.html
 Returns: List of all animals at a shelter
 """
-@app.route("/home/<int:shelterID>", methods = ['GET'])
+@app.route("/<int:shelterID>", methods = ['GET', 'POST'])
+@app.route("/index/<int:shelterID>", methods = ['GET', 'POST'])
 def main(shelterID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     shelter = []
-    shelter = cursor.execute(('SELECT name, shelter_id FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
+    shelter = cursor.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
     animals = cursor.execute(('SELECT animal_id, name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     if not shelter:
-        return "No shelter found."
-    return render_template('home.html', animals = animals, shelter = shelter, indexLine = "/home/" + str(shelterID))
+        return render_template('index.html', animals = animals)
+    
+    return render_template('index.html', animals = animals, shelter = shelter)
 
 
 
@@ -251,8 +313,8 @@ Methods: GET
 Template: animal.html
 Returns: Returns the information for a single animal
 """
-@app.route("/animal/<int:shelterID>/<int:animalID>", methods = ['GET'])
-def index_by_id(shelterID = 1, animalID = 0):
+@app.route("/animal/<int:animalID>", methods = ['GET', 'POST'])
+def index_by_id(animalID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
@@ -260,16 +322,11 @@ def index_by_id(shelterID = 1, animalID = 0):
     conn.close()
     if not animal:
        return "Animal not found."
-    return render_template("animal.html", animal=animal, indexLink = "/home/" + str(shelterID))
+    return render_template("animal.html", animal=animal)
 
 
 # (NOT COMPLETED) ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
 #---------------------------------------------------------------------------------------------------#
-
-#create a new account
-@app.route("/login")
-def login():
-    return ("connects to account page based on id if username and pass match")
 
 #edit account
 @app.route("/account/<int:account_id>/edit", methods = ["POST"])
@@ -298,6 +355,91 @@ def animal_edit():
     return ("function to edit animal info")
 
 # button to link to adoption form, and shelter view
+
+# Login and Registration - Login and Registration - Login and Registration - Login and Registration #
+#---------------------------------------------------------------------------------------------------#
+
+#registration; displays form in both GET and POST
+@app.route('/signup', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        #account_type = request.form['type']  # "shelter" or "owner"
+        account_type = "shelter"
+        #generates hashed pw
+        hashed_password = generate_password_hash(password)
+
+        #inserts the new user into the database
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        try:
+            cursor.execute("INSERT INTO login (username, password, type) VALUES (?, ?, ?)", (username, hashed_password, account_type))
+            conn.commit()
+            return redirect(url_for('login'))
+        except sqlite3.IntegrityError:
+            #stops for duplicate username
+            return "Username Already Exists"
+        finally:
+            conn.close()
+    return render_template('signup.html')
+
+#for login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        #searches for user by the username
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, username, password, type FROM login WHERE username = ?", (username,))
+        user_data = cursor.fetchone()
+        conn.close()
+
+        #if username and password matches
+        if user_data and check_password_hash(user_data[2], password):
+            user = User(user_data[0], user_data[1], user_data[2], user_data[3])
+            login_user(user) #logs the user in
+            if user.type == 'shelter':
+                return redirect(url_for('shelter_dashboard'))
+            else:
+                return redirect(url_for('owner_dashboard'))
+            
+        else:
+            return "Invalid Username or Password"
+    
+    return render_template('login.html')
+
+@app.route('/logout')
+@login_required #makes sure only logged in people can log out
+def logout(): #logs out current user
+    logout_user()
+    return redirect(url_for('login'))
+
+#logs the user into their home page. will change when we work on different account types
+@app.route('/userHomePage')
+@login_required
+def userHomePage():
+    return f"Welcome, {current_user.username}!"
+
+#for our different account types. 
+#logs user into shelter
+@app.route('/shelter_dashboard')
+@login_required
+def shelter_dashboard():
+    if current_user.type != 'shelter':
+        return "Access Denied: Only shelters can view this page.", 403
+    return f"Welcome, shelter user {current_user.username}!"
+
+#logs user into owner
+@app.route('/owner_dashboard')
+@login_required
+def owner_dashboard():
+    if current_user.type != 'owner':
+        return "Access Denied: Only owners can view this page.", 403
+    return f"Welcome, owner user {current_user.username}!"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
