@@ -52,3 +52,9 @@ Actual: 3 hrs
 Implemented the login API into our main API
 Estimate: 30 mins
 Actual: 1 hr
+
+11/15/25
+11:30 - 1:00
+Added the shelter and owner account types into the login API and tested the API with the HTML
+Estimate: 1 hr
+Actual: 1.5 hr
