@@ -7,7 +7,7 @@
 # Found this (https://www.geeksforgeeks.org/python/how-to-build-a-web-app-using-flask-and-sqlite-in-python/#) when trying to figure out why the animal 
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
 # I had seen previous mentions of a form with HTML so I looked up "HTML form" and used W3 for my form syntax since they're my go-to for
-# documentation. This was used for login and sign up
+# documentation. This was used for login and sign up.
 
 """
 Citations for login and registration:
@@ -140,7 +140,7 @@ def preset():
     CREATE TABLE IF NOT EXISTS login (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
         type TEXT NOT NULL CHECK(type IN ('shelter', 'owner'))
     )
     """)
@@ -170,7 +170,7 @@ def preset():
     VALUES
     (1, 1, 'Buddy', 'Dog', 'Labrador Retriever', 'Male', 1, 1, 'Available', '2025-02-05', 1, '2025-03-10', 1, 1),
     (1, 2, 'Misty', 'Cat', 'Siamese', 'Female', 0, 1, 'Adopted', '2025-01-22', 1, '2025-02-15', 1, 1),
-    (1, 3, 'Rocky', 'Dog', 'German Shepherd', 'Male', 0, 0, 'In Shelter', '2025-03-01', 1, '2025-03-20', 1, 0)
+    (1, 7, 'Rocky', 'Dog', 'German Shepherd', 'Male', 0, 0, 'In Shelter', '2025-03-01', 1, '2025-03-20', 1, 0)
     """)
 
     # Insert Foster (Laura Kim fostering Buddy)
@@ -331,7 +331,8 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        account_type = request.form['type']  # "shelter" or "owner"
+        #account_type = request.form['type']  # "shelter" or "owner" - didn't work with sign up page so I made a defined version for now
+        account_type = "shelter"
         #generates hashed pw
         hashed_password = generate_password_hash(password)
 
@@ -339,7 +340,7 @@ def register():
         conn = get_db_connection()
         cursor = conn.cursor()
         try:
-            cursor.execute("INSERT INTO login (username, password, type) VALUES (?, ?)", (username, hashed_password, account_type))
+            cursor.execute("INSERT INTO login (username, password, type) VALUES (?, ?, ?)", (username, hashed_password, account_type))
             conn.commit()
             return redirect(url_for('login'))
         except sqlite3.IntegrityError:
@@ -347,7 +348,7 @@ def register():
             return "Username Already Exists"
         finally:
             conn.close()
-    return render_template('register.html')
+    return render_template('signup.html')
 
 #for login
 @app.route('/login', methods=['GET', 'POST'])
@@ -367,13 +368,11 @@ def login():
         if user_data and check_password_hash(user_data[2], password):
             user = User(user_data[0], user_data[1], user_data[2], user_data[3])
             login_user(user) #logs the user in
-            """ whenever we figure out shelter vs owner dashboard
             if user.type == 'shelter':
                 return redirect(url_for('shelter_dashboard'))
             else:
                 return redirect(url_for('owner_dashboard'))
-            """
-            return redirect(url_for('userHomePage'))
+            
         else:
             return "Invalid Username or Password"
     
@@ -391,7 +390,7 @@ def logout(): #logs out current user
 def userHomePage():
     return f"Welcome, {current_user.username}!"
 
-""" for our different account types. 
+#for our different account types. 
 #logs user into shelter
 @app.route('/shelter_dashboard')
 @login_required
@@ -407,7 +406,6 @@ def owner_dashboard():
     if current_user.type != 'owner':
         return "Access Denied: Only owners can view this page.", 403
     return f"Welcome, owner user {current_user.username}!"
-"""
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
