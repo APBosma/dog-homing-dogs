@@ -207,7 +207,7 @@ def preset():
 """
 Routes: /, /index
 Methods: GET
-Template: index..html
+Template: index.html
 Returns: Lists all shelters with their address, clicking the shelter takes you to the shelter's home page
 """
 @app.route("/")
