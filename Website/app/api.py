@@ -20,8 +20,7 @@ I also looked at previously made portions of the API and implemented some of the
 
 
 from flask import Flask, request, redirect, url_for, render_template
-#from . import app
-app = Flask(__name__)
+from . import app
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
@@ -288,8 +287,8 @@ Methods: GET
 Template: home.html
 Returns: List of all animals at a shelter
 """
-@app.route("/<int:shelterID>", methods = ['GET', 'POST'])
-@app.route("/index/<int:shelterID>", methods = ['GET', 'POST'])
+@app.route("/<int:shelterID>", methods = ['GET'])
+@app.route("/home/<int:shelterID>", methods = ['GET'])
 def main(shelterID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
@@ -299,9 +298,9 @@ def main(shelterID = 0):
     animals = cursor.execute(('SELECT animal_id, name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     if not shelter:
-        return render_template('index.html', animals = animals)
+        return render_template('home.html', animals = animals)
     
-    return render_template('index.html', animals = animals, shelter = shelter)
+    return render_template('home.html', animals = animals, shelter = shelter)
 
 
 
@@ -441,5 +440,5 @@ def owner_dashboard():
         return "Access Denied: Only owners can view this page.", 403
     return f"Welcome, owner user {current_user.username}!"
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
