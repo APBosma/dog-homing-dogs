@@ -129,3 +129,12 @@ Task:Tried to run the thing to see what we have left, but it wont work. trying t
 Estimate: -
 Actual: 1 hour
 Notes: import . is throwing an error, I can get it to run if I get rid of it and make app = "__name__" allowing flask to run, but it wont bring up any of the pages. unsure what happened, this was working a few weeks ago. 
+
+11/16/2025
+Start–End:3-5
+Task: got everytthing up and running, made a list of what we needed to work on to simplify code
+estimate -
+Actual: 2 hours
+Notes: Made a list of everything we needed to delete, figured out what was going wrong with the flask and why it would not work. got everything working, we are in a good spot to just add the rest of our features. 
+
+---------------- week 10 report ^
