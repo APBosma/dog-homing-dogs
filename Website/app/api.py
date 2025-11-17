@@ -358,7 +358,7 @@ def animal_edit():
 #---------------------------------------------------------------------------------------------------#
 
 #registration; displays form in both GET and POST
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup.html', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
@@ -380,10 +380,14 @@ def register():
             return "Username Already Exists"
         finally:
             conn.close()
-    return render_template('signup.html')
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    shelters = cursor.execute('SELECT name, shelter_id FROM Shelter').fetchall()
+    return render_template('signup.html', shelters = shelters)
 
 #for login
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login.html', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         username = request.form['username']
