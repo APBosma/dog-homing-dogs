@@ -256,7 +256,7 @@ def index_by_id(shelterID = 1, animalID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    animal = cursor.execute(('SELECT name, type, breed, animal_id, sex FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
+    animal = cursor.execute(('SELECT name, type, breed, animal_id, sex, date_time_arrived, vaccines, spayed_neutered FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
     conn.close()
     if not animal:
        return "Animal not found."
