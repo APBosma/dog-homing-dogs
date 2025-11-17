@@ -142,3 +142,27 @@ Estimate: 1.5 hour
 Actual: 1.25 hour
 Notes: PR #5
 Backfilled: No
+
+Date: 11/10/2025
+Start–End: 10:45 am - 11:38 am
+Task: Implemented new CSS and added more fake info
+Estimate: .5 hour
+Actual: 1 hour
+Notes: Almost done
+Backfilled: No
+
+Date: 11/14/2025
+Start–End: 10:10 am - 10:40 am
+Task: Yapped with Bowe, added PR
+Estimate: 1 hour
+Actual: .5 hour
+Notes: PR #7
+Backfilled: No
+
+Date: 11/17/2025
+Start–End: 3:12 pm - 4:52 pm
+Task: Fixed main, discovered mistakes, solved world hunger
+Estimate: 1 hour
+Actual: 1.5 hour
+Notes: Asked Bowe to take a look
+Backfilled: No
