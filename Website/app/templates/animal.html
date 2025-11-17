@@ -1,34 +1,42 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <title>{{animal['name']}}</title>
 </head>
 <body>
     <div id="container">
         <header>
-            {% if animal %}
-                <p>Meet {{ animal['name'] }}!</p>
-            {% else %}
-                <p>No Animal Found</p>
-            {% endif %}
+            <h1>Meet {{ animal['name'] }}!</h1>
         </header>
+        <body>
         <nav id="navbar">
             <a href = "{{ indexLink }}">Back to Shelter</a>
-            <a href="#">Something Else, IDK</a>
         </nav>
 
-        <body>
+        <main>
             {% if animal %}
-                <div><p>Name: {{ animal['name'] }} 
-                    <b>Status: {{ animal['status'] }}</b>
-                    <b>Type: {{ animal['type'] }}, Breed: {{ animal['breed'] }}</b>
-                    <b>Sex: {{ animal['sex'] }}</b>
-                    <b>Date Arrived: {{ animal['date_time_arrived'] }}</b>
-                    <b>Vaccines (1 means yes, 0 means no): {{ animal['vaccines'] }}</b>
-                    <b>Spayed/Neutered (1 means yes, 0 means no): {{ animal['spayed_neutered'] }}</b>
-                    
-                </p></div>
+                <div id = "animal-info">
+                    <h2>Hi! I'm {{ animal['name'] }}!</h2>
+                    <p>Status: {{ animal['status'] }}</p>
+                    <p>Type: {{ animal['type'] }}, {{ animal['breed'] }}</p>
+                    <p>Sex: {{ animal['sex'] }}</p>
+                    <p>Date Arrived: {{ animal['date_time_arrived'] }}</p>
+
+                    {% if animal['vaccines'] == '1' %}
+                        <p>Vaccines Completed: Yes</p>
+                    {% else %}
+                        <p>Vaccines Completed: No</p>
+                    {% endif %}
+
+                    {% if animal['spayed_neutered'] == '1' %}
+                        <p>Spayed/Neutered: Yes</p>
+                    {% else %}
+                        <p>Spayed/Neutered: No</p>
+                    {% endif %}
+                </div>
             {% endif %}
+        </main>
         </body>
         <footer>Work in progress.</a></footer>
     </div>

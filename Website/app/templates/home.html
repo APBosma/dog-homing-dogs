@@ -1,50 +1,35 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <title>All Animals</title>
-    <style>
-        button {
-            padding: 6px 12px;
-            margin: 5px;
-            cursor: pointer;
-        }
-        #navbar a {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <div id="container">
         <header>
-            {% if shelter %}
-                <p>{{ shelter['name'] }}'s Animals</p>
-            {% else %}
-                <p>All Animals</p>
-            {% endif %}
+            <h1>{{ shelter['name'] }}'s Animals</h1>
         </header>
 
         <nav id="navbar">
-            <a href = "{{ indexLink }}">Back to Shelter</a>
-            <a href="#">Something Else, IDK</a>
+            <a href = "/index">Back To All Shelters</a>
         </nav>
 
-        <body>
+        <main>
             {% if animals %}
+            <div id = "grid">
                 {% for animal in animals %}
-                    
-                    <div><p>{{ animal['name'] }}</p></div>
                     <a href="/animal/{{ shelter['shelter_id'] }}/{{ animal['animal_id'] }}">
-                        <button type="button">Meet {{ animal['name'] }}!</button>
-                    </a> 
-                    <div><p></p>
-                        <b>{{ animal['type'] }}, {{ animal['breed'] }}</b>
-                        <b>{{ animal['sex'] }}</b>
-                    </p></div>
+                        <h2>{{ animal['name'] }}</h2>
+                        <p>{{ animal['type'] }}</p>
+                        <p>{{ animal['breed'] }}</p>
+                        <p>{{ animal['sex'] }}</p>
+                    </a>
                 {% endfor %}
+            </div>
             {% endif %}
-        </body>
+        </main>
 
-        <footer>Work in progress.</a></footer>
+        <footer>Work in progress.</footer>
     </div>
 </body>
 </html>
