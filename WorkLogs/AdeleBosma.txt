@@ -159,10 +159,18 @@ Actual: .5 hour
 Notes: PR #7
 Backfilled: No
 
-Date: 11/17/2025
+Date: 11/16/2025
 Start–End: 3:12 pm - 4:52 pm
 Task: Fixed main, discovered mistakes, solved world hunger
 Estimate: 1 hour
 Actual: 1.5 hour
 Notes: Asked Bowe to take a look
+Backfilled: No
+
+Date: 11/17/2025
+Start–End: 11:35 am - 1:00 pm
+Task: Finished CSS for everything but login and sign up. I also fixed some nav stuff with login and signup and put an example format for the phone number.
+Estimate: 1 hour
+Actual: 1.5 hour
+Notes: PR #8
 Backfilled: No
