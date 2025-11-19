@@ -314,12 +314,12 @@ Methods: GET
 Template: animal.html
 Returns: Returns the information for a single animal
 """
-@app.route("/animal/<int:animalID>", methods = ['GET', 'POST'])
+@app.route("/animal/<int:animalID>", methods = ['GET'])
 def index_by_id(animalID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    animal = cursor.execute(('SELECT name, type, breed, animal_id, sex, date_time_arrived, vaccines, spayed_neutered FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
+    animal = cursor.execute(('SELECT name, type, shelter_id, breed, animal_id, sex, date_time_arrived, vaccines, spayed_neutered FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
     conn.close()
     if not animal:
        return "Animal not found."
