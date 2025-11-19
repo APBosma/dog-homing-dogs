@@ -138,3 +138,10 @@ Actual: 2 hours
 Notes: Made a list of everything we needed to delete, figured out what was going wrong with the flask and why it would not work. got everything working, we are in a good spot to just add the rest of our features. 
 
 ---------------- week 10 report ^
+
+11/19/2025
+Start–End: 10:20 - 10:50
+Task: adjusted readme 
+estimate -
+Actual: 30 minutes
+Notes: 
