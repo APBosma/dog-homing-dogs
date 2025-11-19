@@ -1,23 +1,27 @@
-# dog-homing-dogs
-
-CLICK ON RAW FOR EASIER VIEW -------->
-dog-homing-dogs/Databases/empty
-│
-├── DogShelterCreate.py           # Run this once to create the .db file
-├── Not_A_Virus.txt           #  Run this once to create the .db file
-├── animal_shelter.db      # This gets created automatically
-├── app.py                # Where our api is 
-└── requirements.txt         # Will need to add this later i think, it was in al lthe examples i could find 
-
-
-Project for software engineering.
-
-Come up with a title (Working Title)
-
+# PAWSTER
 **Overview**
-
 FosterConnect is an app designed to help communities better care for stray and at-risk dogs and cats. Inspired by real experiences with overcrowded shelters and limited resources, the app creates a direct connection between people who find stray dogs, those who can foster them, and potential adopters. It relies on the generosity of others and it not an application used to proffit from people. although we may potentially run ads to pay for upkeep. 
 **
+
+CLICK ON RAW FOR EASIER VIEW -------->
+
+# File Structure
+dog-homing-dogs/Website
+│
+├── web.py #  run this to  run everything 
+├── app
+|     ├── _pycache_ #You can ignore this 
+|     ├── static
+|     |       └── style.css
+|     ├── templates
+|             ├── __init__.py  # You can ignore this 
+|             └── api.py       # Api calls 
+|
+├── animal_shelter.db          # This gets created automatically
+├── app.py                     # Where our api is 
+└── requirements.txt           # Will need to add this later i think, it was in al lthe examples i could find 
+
+
 Core Features**
 
   Foster Network
