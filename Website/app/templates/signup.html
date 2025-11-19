@@ -16,23 +16,89 @@
             <form action="/signup.html" method="POST">
                 <br>
                 <label for = "username">Username:</label><br>
-                    <input type = "text" id = "useranme" name = "username" maxlength="50"><br>
+                    <input type = "text" id = "username" name = "username" maxlength="50"><br>
                 <label for = "password">Password:</label><br>
                     <input type = "password" id = "password" name = "password" maxlength="50"><br>
                 <label for = "repassword">Re-Type Password:</label><br>
                     <input type = "password" id = "repassword" name = "repassword" maxlength="50"><br>
+                <label for = "firstname">First Name:</label><br>
+                    <input type = "firstname" id = "firstname" name = "firstname" maxlength="50"><br>
+                <label for = "lastname">Last Name:</label><br>
+                    <input type = "lastname" id = "lastname" name = "lastname" maxlength="50"><br>
+                <label for = "street">Street:</label><br>
+                    <input type = "street" id = "street" name = "street" maxlength="50"><br>
                 <label for="email">Email:</label><br>
                     <input type="email" id="email" name="email"><br>
                 <label for="phone">Phone Number (Format: ###-###-####):</label><br>
                     <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br>
-                <label for = "shelterChoice">Choose your shelter or put "Shelter Owner" if you are a shelter owner looking to add yours:</label><br>
-                    <select id = "shelterChoice" name = "shelterChoice">
-                        <option value = "shelterOwner">Shelter Owner</option>
-                        {% for shelter in shelters %}
-                            <option value = "{{ shelter['shelter_id'] }}"> {{ shelter['name'] }}</option>
-                        {% endfor %}
-                    </select><br>
-                <br>
+                <label for="shelterChoice">Choose your shelter or select "Shelter Owner" to add yours:</label><br>
+                <select id="shelterChoice" name="shelterChoice">
+                    <option value="shelterOwner">Shelter Owner</option>
+
+                    {% for shelter in shelters %}
+                        <option value="{{ shelter['shelter_id'] }}">{{ shelter['name'] }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <!-- This section shows ONLY when the user clicks the shelter owner -->
+                <details>
+                    <summary>If you are a Shelter Owner, click here to enter your shelter information</summary>
+                    <br>
+
+                    <label for="newShelterName">Shelter Name:</label><br>
+                    <input type="text" id="newShelterName" name="newShelterName"><br><br>
+
+                    <label for="shelterEmail">Shelter Email:</label><br>
+                    <input type="email" id="shelterEmail" name="shelterEmail"><br><br>
+
+                    <label for="shelterPhone">Shelter Phone (###-###-####):</label><br>
+                    <input type="tel" id="shelterPhone" name="shelterPhone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"><br><br>
+
+                    <label for="street1">Street Address Line 1:</label><br>
+                    <input type="text" id="street1" name="street1"><br><br>
+
+                    <label for="street2">Street Address Line 2 (optional):</label><br>
+                    <input type="text" id="street2" name="street2"><br><br>
+
+                    <label for="city">City:</label><br>
+                    <input type="text" id="city" name="city"><br><br>
+
+                    <label for="state">State:</label><br>
+                    <input type="text" id="state" name="state" maxlength="2"><br><br>
+
+                    <label for="zip">ZIP Code:</label><br>
+                    <input type="text" id="zip" name="zip" maxlength="10"><br><br>
+
+                    <label for="no_kill">No-Kill Shelter?</label><br>
+                    <select id="no_kill" name="no_kill">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select><br><br>
+
+                    <label for="max_dogs">Maximum Dogs:</label><br>
+                    <input type="number" id="max_dogs" name="max_dogs" min="0"><br><br>
+
+                    <label for="max_cats">Maximum Cats:</label><br>
+                    <input type="number" id="max_cats" name="max_cats" min="0"><br><br>
+
+                    <label for="dogs">Currently Accepting Dogs?</label><br>
+                    <select id="dogs" name="dogs">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select><br><br>
+
+                    <label for="cats">Currently Accepting Cats?</label><br>
+                    <select id="cats" name="cats">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select><br><br>
+
+                    <label for="shelterPasscode">Shelter Passcode (Important for Future Sign Ups):</label><br>
+                    <input type="password" id="shelterPasscode" name="shelterPasscode"><br><br>
+
+                </details>
+
+
                 <input type="submit" value="Sign Up">
             </form>
             {% if error %}
