@@ -71,6 +71,7 @@ def preset():
         max_cats INTEGER NOT NULL,
         dogs BOOLEAN NOT NULL,
         cats BOOLEAN NOT NULL,
+        shelterPasscode INTEGER NOT NULL,
         FOREIGN KEY (account_id) REFERENCES Account(account_id)
     )
     """)
@@ -140,7 +141,9 @@ def preset():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
+        shelter_id INTEGER,
         type TEXT NOT NULL CHECK(type IN ('shelter', 'owner'))
+        FOREIGN KEY (shelter_id) REFERENCES Shelter(shelter_id)
     )
     """)
 
@@ -148,7 +151,7 @@ def preset():
 
     # Insert Accounts (some are adopters, fosters, shelter staff)
     cursor.execute("""
-    INSERT INTO Account (type, firstname, lastname, email, phone, street1, datetime_created, datetime_modified)
+    INSERT OR IGNORE INTO Account (type, firstname, lastname, email, phone, street1, datetime_created, datetime_modified)
     VALUES 
     ('staff', 'Emily', 'Johnson', 'emily.johnson@shelter.org', '555-1001', '123 Oak St', '2025-01-10', '2025-03-12'),
     ('adopter', 'James', 'Miller', 'james.miller@example.com', '555-2002', '45 Pine Ave', '2025-02-02', '2025-02-02'),
@@ -158,7 +161,7 @@ def preset():
 
     # Insert Shelter
     cursor.execute("""
-    INSERT INTO Shelter (name, email, phone, street1, street2, city, state, zip, account_id, date_shelter_added, no_kill, max_dogs, max_cats, dogs, cats)
+    INSERT OR IGNORE INTO Shelter (name, email, phone, street1, street2, city, state, zip, account_id, date_shelter_added, no_kill, max_dogs, max_cats, dogs, cats)
     VALUES
     ('Happy Tails Shelter', 'info@happytails.org', '555-1111', '321 Shelter Ln', NULL, 'Springfield', 'IL', '62704', 1, '2025-01-15', 1, 50, 30, 1, 1),
     ('Safe Paws Rescue', 'contact@safepaws.org', '555-2222', '89 Rescue Road', NULL, 'Madison', 'WI', '53703', 2, '2025-02-01', 1, 40, 25, 12, 8),
@@ -172,7 +175,7 @@ def preset():
 
     # Insert Animals
     cursor.execute("""
-    INSERT INTO Animal (shelter_id, animal_id, name, type, breed, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered)
+    INSERT OR IGNORE INTO Animal (shelter_id, animal_id, name, type, breed, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered)
     VALUES
     (1, 1, 'Buddy', 'Dog', 'Labrador Retriever', 'Male', 1, 1, 'Available', '2025-02-05', 1, '2025-03-10', 1, 1),
     (1, 2, 'Misty', 'Cat', 'Siamese', 'Female', 0, 1, 'Adopted', '2025-01-22', 1, '2025-02-15', 1, 1),
@@ -191,7 +194,7 @@ def preset():
 
     # Insert Foster (Laura Kim fostering Buddy)
     cursor.execute("""
-    INSERT INTO Foster (account_id, animal_id, shelter_id, other_pets, children, num_adults, notes, datetime_start, datetime_end)
+    INSERT OR IGNORE INTO Foster (account_id, animal_id, shelter_id, other_pets, children, num_adults, notes, datetime_start, datetime_end)
     VALUES
     (3, 1, 1, 2, 1, 2, 'Very active foster family with fenced yard.', '2025-03-10', '2025-05-15'),
     (4, 2, 1, 0, 0, 1, 'Single adult with quiet home. No other pets.', '2025-01-05', '2025-02-20'),
@@ -205,7 +208,7 @@ def preset():
 
     # Insert Adoption (James Miller adopted Misty)
     cursor.execute("""
-    INSERT INTO Adoption (account_id, animal_id, fee_amount, fee_payed)
+    INSERT OR IGNORE INTO Adoption (account_id, animal_id, fee_amount, fee_payed)
     VALUES
     (2, 2, 100, 100),
     (2, 1, 150, 150),
@@ -218,7 +221,7 @@ def preset():
 
     # Insert ShelterOwner (Emily Johnson owns the shelter)
     cursor.execute("""
-    INSERT INTO ShelterOwner (shelter_id, account_id)
+    INSERT OR IGNORE INTO ShelterOwner (shelter_id, account_id)
     VALUES
     (1, 1),
     (2,4),
@@ -363,8 +366,103 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        #account_type = request.form['type']  # "shelter" or "owner"
+        shelter_choice = request.form['shelterChoice']
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        email = request.form['email']
+        phone = request.form['phone']
+        street = request.form['street']
+
+        #makes sure everything is properly filled out in sign up
+        required_user_fields = [username, password, firstname, lastname, email, phone, street]
+        if any(field.strip() == "" for field in required_user_fields):
+            return render_template("signup.html", error="Please fill out all information.")
+
+        #extra information to fill out if "shelterOwner" is selected
+        if shelter_choice == "shelterOwner":
+            required_shelter_fields = {
+                "Shelter Name": request.form.get("newShelterName", ""),
+                "Shelter Email": request.form.get("shelterEmail", ""),
+                "Shelter Phone": request.form.get("shelterPhone", ""),
+                "Street Address 1": request.form.get("street1", ""),
+                "City": request.form.get("city", ""),
+                "State": request.form.get("state", ""),
+                "ZIP Code": request.form.get("zip", ""),
+                "No Kill": request.form.get("no_kill", ""),
+                "Max Dogs": request.form.get("max_dogs", ""),
+                "Max Cats": request.form.get("max_cats", ""),
+                "Accepting Dogs": request.form.get("dogs", ""),
+                "Accepting Cats": request.form.get("cats", ""),
+                "Shelter Passcode": request.form.get("shelterPasscode", "")
+            }
+
+            missing = [label for label, value in required_shelter_fields.items() if value == ""]
+
+            if missing:
+                return render_template(
+                    "signup.html",
+                    error="Missing Shelter Owner Fields: " + ", ".join(missing)
+                )
+
+        # Determine user type and shelter association
+        if shelter_choice == "shelterOwner":
+            type = "owner"
+            #inserting into shelter table
+            newShelterName = request.form['newShelterName']
+            shelterEmail = request.form['shelterEmail']
+            shelterPhone = request.form['shelterPhone']
+            street1 = request.form['street1']
+            street2 = request.form.get('street2')
+            city = request.form['city']
+            state = request.form['state']
+            zip_code = request.form['zip']
+            no_kill = request.form['no_kill']
+            max_dogs = request.form['max_dogs']
+            max_cats = request.form['max_cats']
+            dogs = request.form['dogs']
+            cats = request.form['cats']
+            shelterPasscode = request.form['shelterPasscode']
+
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT INTO Shelter (
+                    name, email, phone, street1, street2,
+                    city, state, zip,
+                    date_shelter_added,
+                    no_kill, max_dogs, max_cats, dogs, cats,
+                    shelterPasscode
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, DATE('now'), ?, ?, ?, ?, ?, ?)
+            """, (
+                newShelterName,
+                shelterEmail,
+                shelterPhone,
+                street1,
+                street2,
+                city,
+                state,
+                zip_code,
+                no_kill,
+                max_dogs,
+                max_cats,
+                dogs,
+                cats,
+                shelterPasscode
+            ))
+
+            #automatically sets lastrowid to the PK of the shelter row
+            shelter_id = cursor.lastrowid
+
+            conn.commit()
+            conn.close()
+    
+        else:
+            type = "shelter"
+            account_type = "shelter"
+            shelter_id = int(shelter_choice)
         account_type = "shelter"
+        
         #generates hashed pw
         hashed_password = generate_password_hash(password)
 
@@ -372,7 +470,8 @@ def register():
         conn = get_db_connection()
         cursor = conn.cursor()
         try:
-            cursor.execute("INSERT INTO login (username, password, type) VALUES (?, ?, ?)", (username, hashed_password, account_type))
+            cursor.execute("INSERT INTO login (username, password, type, shelter_id) VALUES (?, ?, ?, ?)", (username, hashed_password, account_type, shelter_id))
+            cursor.execute("INSERT INTO Account (type, firstname, lastname, email, phone, street1, datetime_created) VALUES (?, ?, ?, ?, ?, ?, DATE('now'))", (type, firstname, lastname, email, phone, street))
             conn.commit()
             return redirect(url_for('login'))
         except sqlite3.IntegrityError:
@@ -404,10 +503,22 @@ def login():
         if user_data and check_password_hash(user_data[2], password):
             user = User(user_data[0], user_data[1], user_data[2], user_data[3])
             login_user(user) #logs the user in
-            if user.type == 'shelter':
+            conn = get_db_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT shelter_id FROM login WHERE id = ?", (user.id,))
+            row = cursor.fetchone()
+            conn.close()
+
+            user_shelter_id = row[0]
+
+            if user.type == 'shelter' and user_shelter_id:
                 return redirect(url_for('shelter_dashboard'))
-            else:
+
+            elif user.type == 'owner':
                 return redirect(url_for('owner_dashboard'))
+
+            else:
+                return "Shelter user has no shelter ID"
             
         else:
             return "Invalid Username or Password"
@@ -420,20 +531,24 @@ def logout(): #logs out current user
     logout_user()
     return redirect(url_for('login'))
 
-#logs the user into their home page. will change when we work on different account types
-@app.route('/userHomePage')
-@login_required
-def userHomePage():
-    return f"Welcome, {current_user.username}!"
-
 #for our different account types. 
 #logs user into shelter
 @app.route('/shelter_dashboard')
 @login_required
 def shelter_dashboard():
     if current_user.type != 'shelter':
-        return "Access Denied: Only shelters can view this page.", 403
-    return f"Welcome, shelter user {current_user.username}!"
+        return "Access Denied", 403
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT shelter_id FROM login WHERE id = ?", (current_user.id,))
+    row = cursor.fetchone()
+    conn.close()
+
+    if row and row['shelter_id']:
+        return redirect(url_for('main', shelterID=row['shelter_id']))
+
+    return "Error: No shelter associated with this account"
 
 #logs user into owner
 @app.route('/owner_dashboard')
@@ -441,7 +556,11 @@ def shelter_dashboard():
 def owner_dashboard():
     if current_user.type != 'owner':
         return "Access Denied: Only owners can view this page.", 403
-    return f"Welcome, owner user {current_user.username}!"
+
+    # Redirect shelter owners to the main index page
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
+    preset() #creates our db and adds our info 
     app.run(debug=True)
