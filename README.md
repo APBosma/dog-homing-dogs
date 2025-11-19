@@ -1,6 +1,9 @@
 # PAWSTER
 **Overview**
-FosterConnect is an app designed to help communities better care for stray and at-risk dogs and cats. Inspired by real experiences with overcrowded shelters and limited resources, the app creates a direct connection between people who find stray dogs, those who can foster them, and potential adopters. It relies on the generosity of others and it not an application used to proffit from people. although we may potentially run ads to pay for upkeep. 
+Pawster is a database application with three primary users: animal shelters, animal fosters, and adopters.
+Aniaml Shelter: They can sign up and add and remove animal shelter. 
+Aniaml Foster: They can sign up and add and remove animals for thier foster home.
+Aniaml Users: are able to view animals without signing up and are able to contact a shelter to get in touch and see an animal.
 **
 
 CLICK ON RAW FOR EASIER VIEW -------->
@@ -13,7 +16,7 @@ dog-homing-dogs/Website
 |     ├── _pycache_ #You can ignore this 
 |     ├── static
 |     |       └── style.css
-|     ├── templates
+|     └── templates
 |             ├── __init__.py  # You can ignore this 
 |             └── api.py       # Api calls 
 |
@@ -56,12 +59,7 @@ Core Features**
 
 **Status
 **
-  This project is in the early planning stages. We are currently exploring what features are feasible to implement and how best to design the user experience.
+  This project is in the coding stage. We have it working mostly, but needs some updating 
 
 **Next Steps**
-
-  Finalize core features based on feedback and project requirements.
-  
-  Determine scope (web app, mobile app, or prototype).
-  
-  Begin designing user data flow and consider coding languages 
+Modify certain aspects to make sure everything works. 
