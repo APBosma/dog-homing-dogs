@@ -58,3 +58,17 @@ Actual: 1 hr
 Added the shelter and owner account types into the login API and tested the API with the HTML
 Estimate: 1 hr
 Actual: 1.5 hr
+
+11/17/25
+9:30 - 12:15
+Worked on connecting the sign up page to fill in shelter table, login table, and account table in animal_db.
+Also changed HTML to ask questions when choosing "shelterOwner" and creating the new shelter.
+Also worked on login, where you are now directed immediately to your shelter instead of the index.
+Estimate: 1 hr
+Actual: 2.75 hrs
+
+11/18/25
+7:15-7:45
+Worked on sign up page where you now cannot leave spaces blank. You now have to answer every question to continue with the registration.
+Estimate: 45 mins
+Actual: 30 mins
