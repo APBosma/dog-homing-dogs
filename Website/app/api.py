@@ -161,16 +161,16 @@ def preset():
 
     # Insert Shelter
     cursor.execute("""
-    INSERT OR IGNORE INTO Shelter (name, email, phone, street1, street2, city, state, zip, account_id, date_shelter_added, no_kill, max_dogs, max_cats, dogs, cats)
+    INSERT OR IGNORE INTO Shelter (name, email, phone, street1, street2, city, state, zip, account_id, date_shelter_added, no_kill, max_dogs, max_cats, dogs, cats, shelterPasscode)
     VALUES
-    ('Happy Tails Shelter', 'info@happytails.org', '555-1111', '321 Shelter Ln', NULL, 'Springfield', 'IL', '62704', 1, '2025-01-15', 1, 50, 30, 1, 1),
-    ('Safe Paws Rescue', 'contact@safepaws.org', '555-2222', '89 Rescue Road', NULL, 'Madison', 'WI', '53703', 2, '2025-02-01', 1, 40, 25, 12, 8),
-    ('Second Chance Animals', 'hello@secondchance.org', '555-3333', '14 Hope Ave', 'Suite B', 'Denver', 'CO', '80205', 3, '2025-03-12', 0, 60, 40, 30, 15),
-    ('Furever Home Sanctuary', 'support@fureverhome.com', '555-4444', '700 Pawprint Dr', NULL, 'Austin', 'TX', '73301', 4, '2025-01-22', 1, 80, 50, 45, 25),
-    ('Loving Hearts Animal Center', 'info@lovinghearts.net', '555-5555', '902 Kindness St', 'Building 2', 'Portland', 'OR', '97201', 5, '2025-04-05', 1, 35, 20, 18, 9),
-    ('Paws & Whiskers Haven', 'support@pawswhiskers.org', '555-6666', '1200 Furry Rd', NULL, 'Atlanta', 'GA', '30301', 6, '2025-05-10', 0, 25, 18, 10, 6),
-    ('Bright Horizons Animal Shelter', 'staff@brighthorizons.org', '555-7777', '55 Sunrise Ct', NULL, 'Seattle', 'WA', '98101', 7, '2025-03-30', 1, 70, 50, 48, 30),
-    ('Rescue Ridge', 'info@rescueridge.org', '555-8888', '777 Ridge Lane', NULL, 'Phoenix', 'AZ', '85001', 8, '2025-02-18', 0, 45, 25, 20, 13)
+    ('Happy Tails Shelter', 'info@happytails.org', '555-1111', '321 Shelter Ln', NULL, 'Springfield', 'IL', '62704', 1, '2025-01-15', 1, 50, 30, 1, 1, 1234),
+    ('Safe Paws Rescue', 'contact@safepaws.org', '555-2222', '89 Rescue Road', NULL, 'Madison', 'WI', '53703', 2, '2025-02-01', 1, 40, 25, 12, 8, 1234),
+    ('Second Chance Animals', 'hello@secondchance.org', '555-3333', '14 Hope Ave', 'Suite B', 'Denver', 'CO', '80205', 3, '2025-03-12', 0, 60, 40, 30, 15, 1234),
+    ('Furever Home Sanctuary', 'support@fureverhome.com', '555-4444', '700 Pawprint Dr', NULL, 'Austin', 'TX', '73301', 4, '2025-01-22', 1, 80, 50, 45, 25, 1234),
+    ('Loving Hearts Animal Center', 'info@lovinghearts.net', '555-5555', '902 Kindness St', 'Building 2', 'Portland', 'OR', '97201', 5, '2025-04-05', 1, 35, 20, 18, 9, 1234),
+    ('Paws & Whiskers Haven', 'support@pawswhiskers.org', '555-6666', '1200 Furry Rd', NULL, 'Atlanta', 'GA', '30301', 6, '2025-05-10', 0, 25, 18, 10, 6, 1234),
+    ('Bright Horizons Animal Shelter', 'staff@brighthorizons.org', '555-7777', '55 Sunrise Ct', NULL, 'Seattle', 'WA', '98101', 7, '2025-03-30', 1, 70, 50, 48, 30, 1234),
+    ('Rescue Ridge', 'info@rescueridge.org', '555-8888', '777 Ridge Lane', NULL, 'Phoenix', 'AZ', '85001', 8, '2025-02-18', 0, 45, 25, 20, 13, 1234)
     """)
 
     # Insert Animals
