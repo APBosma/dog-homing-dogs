@@ -18,7 +18,7 @@ CLICK ON RAW FOR EASIER VIEW -------->
 
 # File Structure
 
-`
+```
 dog-homing-dogs/Website
 │
 ├── web.py #  run this to  run everything 
@@ -33,7 +33,7 @@ dog-homing-dogs/Website
 ├── animal_shelter.db          # This gets created automatically
 ├── app.py                     # Where our api is 
 └── requirements.txt           # Will need to add this later i think, it was in al lthe examples i could find 
-`
+```
 
 Core Features**
 
