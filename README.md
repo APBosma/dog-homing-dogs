@@ -70,4 +70,5 @@ Too often, stray and surrendered dogs are left without safe options because loca
   This project is in the coding stage. We have it working mostly, but needs some updating 
 
 **Next Steps**
+
 Modify certain aspects to make sure everything works. 
