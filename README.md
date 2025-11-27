@@ -4,7 +4,6 @@ Pawster is a database application with three primary users: animal shelters, ani
 Aniaml Shelter: They can sign up and add and remove animal shelter. 
 Aniaml Foster: They can sign up and add and remove animals for thier foster home.
 Aniaml Users: are able to view animals without signing up and are able to contact a shelter to get in touch and see an animal.
-**
 
 # Requirements
 This was coded using Python 3.12.4, so you should probably run it using that at minimum. If don't have it installed, here is the [link](https://www.python.org/downloads/release/python-3124/) to download this version. Once you have Python installed, you have two options:
