@@ -174,3 +174,11 @@ Estimate: 1 hour
 Actual: 1.5 hour
 Notes: PR #8
 Backfilled: No
+
+Date: 11/27/2025
+Start–End: Sorry, didn't keep track, just worked throughout day
+Task: Cleaned up the ReadMe
+Estimate: 1 hour
+Actual: 1 hour
+Notes: Added requirements and just cleaned up everything else
+Backfilled: No
