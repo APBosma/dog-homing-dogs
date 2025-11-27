@@ -39,14 +39,14 @@ dog-homing-dogs/Website
 └── requirements.txt           # Will need to add this later i think, it was in al lthe examples i could find 
 ```
 
-Current Core Features**
+**Current Core Features**
 
 - Users can signup with a shelter code to update their local shelter's info
 - Shelter owners can make accounts and add their shelter info
 - Users can view local shelters without signing up
 - Users can view all animals of a shelter without signing up
 
-Core Features To Be Added**
+**Core Features To Be Added**
 
 - Foster Network
 - Users can sign up as foster homes.
