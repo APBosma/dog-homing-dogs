@@ -8,13 +8,13 @@ Aniaml Users: are able to view animals without signing up and are able to contac
 
 # Requirements
 This was coded using Python 3.12.4, so you should probably run it using that at minimum. If don't have it installed, here is the [link](https://www.python.org/downloads/release/python-3124/) to download this version. Once you have Python installed, you have two options:
-1. Run Requirements.txt
+1. Run Requirements.txt in your virtual environment
    
 ```
 $   pip install -r requirements.txt
 ```
 
-2. Pip install everything one by one (Because why not do things the hard way)
+2. Pip install everything one by one in your virtual environment (Because why not do things the hard way)
 ```
 $   pip install Flask
 $   pip install flask-login
