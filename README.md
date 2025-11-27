@@ -6,6 +6,12 @@ Aniaml Foster: They can sign up and add and remove animals for thier foster home
 Aniaml Users: are able to view animals without signing up and are able to contact a shelter to get in touch and see an animal.
 **
 
+# Requirements
+This was coded using Python 3.12.4, so you should probably run it using that at minimum. If don't have it installed, here is the [link](https://www.python.org/downloads/release/python-3124/) to download this version. Once you have Python installed, you have two options:
+1. Run Requirements.txt
+`pip install -r requirements.txt`
+2. Pip install everything one by one (Because why not do things the hard way)
+
 CLICK ON RAW FOR EASIER VIEW -------->
 
 # File Structure
