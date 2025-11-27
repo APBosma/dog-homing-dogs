@@ -25,9 +25,9 @@ $   pip install werkzeug
 ```
 dog-homing-dogs/Website
 │
-├── web.py #  run this to  run everything 
+├── web.py                     # run this to  run everything, creates the app for the API
 ├── app
-|     ├── _pycache_ #You can ignore this 
+|     ├── _pycache_ #   You can ignore this 
 |     ├── static
 |     |       └── style.css
 |     └── templates
@@ -39,40 +39,34 @@ dog-homing-dogs/Website
 └── requirements.txt           # Will need to add this later i think, it was in al lthe examples i could find 
 ```
 
-Core Features**
+Current Core Features**
 
-  Foster Network
-  
-  Users can sign up as foster homes.
-  
-  Anyone who finds a stray dog can quickly connect with available fosters in their area.
-  
-  Rehoming Marketplace
-  
-  A platform for rehoming dogs in need of adoption.
-  
-  Helps prevent abandonment by allowing owners to post their dogs for adoption.
-  
-  Makes it easy for potential adopters to browse available dogs.
-  
-  Shelter Availability (Planned Feature)
-  
-  Shows real-time availability of local animal shelters.
-  
-  Helps users know if bringing a stray to a shelter is an option.
+- Users can signup with a shelter code to update their local shelter's info
+- Shelter owners can make accounts and add their shelter info
+- Users can view local shelters without signing up
+- Users can view all animals of a shelter without signing up
 
+Core Features To Be Added**
+
+- Foster Network
+- Users can sign up as foster homes.
+- Anyone who finds a stray dog can quickly connect with available fosters in their area.
+- Rehoming Marketplace
+- A platform for rehoming dogs in need of adoption.
+- Shelter Availability/Space (Planned Feature)
+    
 **Purpose**
 
-  Too often, stray and surrendered dogs are left without safe options because local shelters are overcrowded. This app provides a community-driven solution by:
+Too often, stray and surrendered dogs are left without safe options because local shelters are overcrowded. This app provides a community-driven solution by:
   
-  Connecting fosters with people who find strays.
+  - Connecting fosters with people who find strays.
   
-  Providing a safe and reliable way to rehome dogs.
+  - Providing a safe and reliable way to rehome dogs.
   
-  Offering better visibility into shelter space when available.
+  - Offering better visibility into shelter space when available.
 
-**Status
-**
+**Status**
+
   This project is in the coding stage. We have it working mostly, but needs some updating 
 
 **Next Steps**
