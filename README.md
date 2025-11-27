@@ -11,13 +11,15 @@ This was coded using Python 3.12.4, so you should probably run it using that at 
 1. Run Requirements.txt
    
 ```
-pip install -r requirements.txt
+$   pip install -r requirements.txt
 ```
 
 2. Pip install everything one by one (Because why not do things the hard way)
-
-CLICK ON RAW FOR EASIER VIEW -------->
-
+```
+$   pip install Flask
+$   pip install flask-login
+$   pip install werkzeug
+```
 # File Structure
 
 ```
