@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Add Animal</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Add Animal</h1>
+        </header>
+
+        <nav id="navbar">
+            <a href = "/home/{{ shelter['shelter_id'] }}">Back To Shelter</a>
+        </nav>
+
+        <main>
+                <form action="/addAnimal.html" method="POST">
+                <br>
+                <label for = "name">Animal Name:</label><br>
+                    <input type = "text" id = "name" name = "name" maxlength="50"><br>
+                <label for = "type">Type:</label><br>
+                   <select id="type" name="type">
+                        <option value="Dog">Dog</option>
+                        <option value="Cat">Cat</option>
+                        <option value="Other">Other</option>
+                    </select>
+                <label for = "breed">Breed:</label><br>
+                    <input type = "breed" id = "breed" name = "breed" maxlength="50"><br>
+                <label for = "sex">sex:</label><br>
+                    <select id="sex" name="sex">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="U">Unknown</option>
+                    </select>
+                <input type="checkbox" id="foster" name="foster" value="foster">
+                    <label for="foster">Available for Foster?</label><br>
+                <input type="checkbox" id="adopt" name="adopt" value="adopt">
+                    <label for="adopt">Available for Adoption?</label><br>
+        </main>
+
+        <footer>Work in progress.</footer>
+    </div>
+</body>
+</html>
+
+<!--source for button shtuff https://www.w3schools.com/tags/tag_button.asp-->
