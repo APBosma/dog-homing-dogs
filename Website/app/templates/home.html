@@ -12,6 +12,9 @@
 
         <nav id="navbar">
             <a href = "/index">Back To All Shelters</a>
+            {{% if loggedIn %}}
+                <button type = "button">+ Add Pet</button>
+            {{% endif %}}
         </nav>
 
         <main>

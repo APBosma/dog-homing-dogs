@@ -300,9 +300,9 @@ def main(shelterID = 0):
     animals = cursor.execute(('SELECT animal_id, name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     if not shelter:
-        return render_template('home.html', animals = animals)
+        return render_template('home.html', animals = animals, loggedIn = current_user.is_authenticated)
     
-    return render_template('home.html', animals = animals, shelter = shelter)
+    return render_template('home.html', animals = animals, shelter = shelter, loggedIn = current_user.is_authenticated)
 
 
 
