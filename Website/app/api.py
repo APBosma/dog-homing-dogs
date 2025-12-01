@@ -325,29 +325,7 @@ def index_by_id(animalID = 0):
        return "Animal not found."
     return render_template("animal.html", animal=animal)
 
-
-# (NOT COMPLETED) ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
-#---------------------------------------------------------------------------------------------------#
-
-#edit account
-@app.route("/account/<int:account_id>/edit", methods = ["POST"])
-def account_edit():
-    return ("function to edit database info")
-    
-#view your account
-@app.route("/account/<int:account_id>", methods = ["GET"])
-def get_account(account_id):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM account WHERE account_id = ?", (account_id,))
-    account = cursor.fetchone()
-    conn.close()
-    if account is None:
-        return "Account not found"
-    return str(account) #we can change this, its just so we can view for testing easier 
-
-# show animal mini bio - if foster, we can have them be able to create and edit pet accounts, if they are with a shelter, same thing. can only manipulate the pets they added and removed (shelters must have approved users to manipulate thier database)
-    
+   
 # Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal #
 #---------------------------------------------------------------------------------------------------#
 
