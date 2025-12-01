@@ -142,7 +142,7 @@ def preset():
         username TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
         shelter_id INTEGER,
-        type TEXT NOT NULL CHECK(type IN ('shelter', 'owner'))
+        type TEXT NOT NULL CHECK(type IN ('shelter', 'owner')),
         FOREIGN KEY (shelter_id) REFERENCES Shelter(shelter_id)
     )
     """)
