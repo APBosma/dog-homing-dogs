@@ -329,9 +329,9 @@ def index_by_id(animalID = 0):
 # Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal #
 #---------------------------------------------------------------------------------------------------#
 
-@app.route("/index/animal/<int:animal_id>/edit", methods = ["GET"])
-def animal_edit():
-    return ("function to edit animal info")
+@app.route("/addAnimal/<int:shelterID>", methods = ['GET'])
+def addAnimal(shelterID = 0):
+    return render_template("addAnimal.html")
 
 # button to link to adoption form, and shelter view
 

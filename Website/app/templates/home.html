@@ -13,7 +13,9 @@
         <nav id="navbar">
             <a href = "/index">Back To All Shelters</a>
             {% if loggedIn %}
-                <button type = "button" onclick="location.href='addAnimal.html'">+ Add Pet</button>
+            <a href = "/addAnimal/{{ shelter['shelter_id'] }}">
+                <button type = "button">+ Add Pet</button>
+            </a>
             {% endif %}
         </nav>
 
