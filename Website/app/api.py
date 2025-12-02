@@ -300,9 +300,9 @@ def main(shelterID = 0):
     animals = cursor.execute(('SELECT animal_id, name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     if not shelter:
-        return render_template('home.html', animals = animals, loggedIn = current_user.is_authenticated)
+        return render_template('home.html', animals = animals, loggedIn = current_user.is_authenticated, shelterID = shelterID)
     
-    return render_template('home.html', animals = animals, shelter = shelter, loggedIn = current_user.is_authenticated)
+    return render_template('home.html', animals = animals, shelter = shelter, loggedIn = current_user.is_authenticated, shelterID = shelterID)
 
 
 
@@ -329,9 +329,11 @@ def index_by_id(animalID = 0):
 # Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal #
 #---------------------------------------------------------------------------------------------------#
 
-@app.route("/addAnimal/<int:shelterID>", methods = ['GET'])
+@app.route("/addAnimal/<int:shelterID>", methods = ['GET', 'POST'])
+@login_required
 def addAnimal(shelterID = 0):
-    return render_template("addAnimal.html")
+    if request.method == 'GET':
+        return render_template("addAnimal.html", shelterID = shelterID)
 
 # button to link to adoption form, and shelter view
 

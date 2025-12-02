@@ -13,9 +13,7 @@
         <nav id="navbar">
             <a href = "/index">Back To All Shelters</a>
             {% if loggedIn %}
-            <a href = "/addAnimal/{{ shelter['shelter_id'] }}">
-                <button type = "button">+ Add Pet</button>
-            </a>
+            <a href = "/addAnimal/{{ shelterID }}">+ Add Pet</a>
             {% endif %}
         </nav>
 
@@ -23,7 +21,7 @@
             {% if animals %}
             <div id = "grid">
                 {% for animal in animals %}
-                    <a href="/animal/{{ shelter['shelter_id'] }}/{{ animal['animal_id'] }}">
+                    <a href="/animal/{{ shelterID }}/{{ animal['animal_id'] }}">
                         <h2>{{ animal['name'] }}</h2>
                         <p>{{ animal['type'] }}</p>
                         <p>{{ animal['breed'] }}</p>

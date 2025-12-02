@@ -11,32 +11,32 @@
         </header>
 
         <nav id="navbar">
-            <a href = "/home/{{ shelter['shelter_id'] }}">Back To Shelter</a>
+            <a href = "/home/{{ shelterID }}">Back To Shelter</a>
         </nav>
 
         <main>
-                <form action="/addAnimal/{{ shelter['shelter_id'] }}" method="POST">
+                <form action="/addAnimal/{{ shelterID }}" method="POST">
                 <br>
                 <label for = "name">Animal Name:</label><br>
                     <input type = "text" id = "name" name = "name" maxlength="50"><br>
-                <label for = "type">Type:</label><br>
+                <label for = "type">Species:</label><br>
                    <select id="type" name="type">
                         <option value="Dog">Dog</option>
                         <option value="Cat">Cat</option>
                         <option value="Other">Other</option>
-                    </select>
+                    </select><br>
                 <label for = "breed">Breed:</label><br>
                     <input type = "breed" id = "breed" name = "breed" maxlength="50"><br>
-                <label for = "sex">sex:</label><br>
+                <label for = "sex">Sex:</label><br>
                     <select id="sex" name="sex">
                         <option value="M">Male</option>
                         <option value="F">Female</option>
                         <option value="U">Unknown</option>
-                    </select>
-                <input type="checkbox" id="foster" name="foster" value="foster">
-                    <label for="foster">Available for Foster?</label><br>
-                <input type="checkbox" id="adopt" name="adopt" value="adopt">
-                    <label for="adopt">Available for Adoption?</label><br>
+                    </select><br>
+                <label for="foster">Available for Foster?</label>
+                    <input type="checkbox" id="foster" name="foster" value="foster"><br>
+                <label for="adopt">Available for Adoption?</label>
+                    <input type="checkbox" id="adopt" name="adopt" value="adopt">
         </main>
 
         <footer>Work in progress.</footer>
