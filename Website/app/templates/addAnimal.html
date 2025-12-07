@@ -18,7 +18,7 @@
                 <form action="/addAnimal/{{ shelterID }}" method="POST">
                 <br>
                 <label for = "name">Animal Name:</label><br>
-                    <input type = "text" id = "name" name = "name" maxlength="50"><br>
+                    <input type = "text" id = "name" name = "name" maxlength="50" placeholder="Add name..."><br>
                 <label for = "type">Species:</label><br>
                    <select id="type" name="type">
                         <option value="Dog">Dog</option>
@@ -26,7 +26,7 @@
                         <option value="Other">Other</option>
                     </select><br>
                 <label for = "breed">Breed:</label><br>
-                    <input type = "breed" id = "breed" name = "breed" maxlength="50"><br>
+                    <input type = "breed" id = "breed" name = "breed" maxlength="50" placeholder="Add breed..."><br>
                 <label for = "sex">Sex:</label><br>
                     <select id="sex" name="sex">
                         <option value="M">Male</option>
@@ -36,7 +36,24 @@
                 <label for="foster">Available for Foster?</label>
                     <input type="checkbox" id="foster" name="foster" value="foster"><br>
                 <label for="adopt">Available for Adoption?</label>
-                    <input type="checkbox" id="adopt" name="adopt" value="adopt">
+                    <input type="checkbox" id="adopt" name="adopt" value="adopt"><br>
+                <label for="status">Status:</label><br>
+                    <textarea id="status" name="status" maxlength="80" placeholder="Add status..." rows="4" cols="50" required></textarea><br>
+                <label for="date_time_arrived">Arrival Date:</label><br>
+                    <input type="date" id="date_time_arrived" name="date_time_arrived" required><br>
+                <label for="chipped">Chipped?</label>
+                    <input type="checkbox" id="chipped" name="chipped" value="1"><br>
+                <label for="date_last_vet_visit">Last Vet Visit:</label><br>
+                    <input type="date" id="date_last_vet_visit" name="date_last_vet_visit"><br>
+                <label for="vaccines">Vaccines?</label>
+                    <input type="checkbox" id="vaccines" name="vaccines" value="1"><br>
+
+                <label for="spayed_neutered">Spayed/Neutered?</label>
+                    <input type="checkbox" id="spayed_neutered" name="spayed_neutered" value="1"><br>
+
+                <br>
+                <button type="submit">Add Animal</button>
+            </form>
         </main>
 
         <footer>Work in progress.</footer>

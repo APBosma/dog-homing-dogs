@@ -334,6 +334,31 @@ def index_by_id(animalID = 0):
 def addAnimal(shelterID = 0):
     if request.method == 'GET':
         return render_template("addAnimal.html", shelterID = shelterID)
+    if request.method == 'POST':
+        name = request.form.get('name')
+        type_ = request.form.get('type')
+        breed = request.form.get('breed')
+        sex = request.form.get('sex')
+        status = request.form.get('status') or None
+        date_time_arrived = request.form.get('date_time_arrived') or None
+        chipped = 0 if request.form.get('chipped') else 1
+        date_last_vet_visit = request.form.get('date_last_vet_visit') or None
+        vaccines = 0 if request.form.get('vaccines') else 1
+        spayed_neutered = 0 if request.form.get('spayed_neutered') else 1
+
+        # checkboxes – they only exist if checked
+        foster = 0 if request.form.get('foster') else 1
+        adopt = 0 if request.form.get('adopt') else 1
+
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO Animal (name, type, breed, shelter_id, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (name, type_, breed, shelterID, sex, foster, adopt, status, date_time_arrived, chipped, date_last_vet_visit, vaccines, spayed_neutered))
+
+        # after inserting, go back to the shelter page
+    return redirect(f"/home/{shelterID}")
 
 # button to link to adoption form, and shelter view
 
