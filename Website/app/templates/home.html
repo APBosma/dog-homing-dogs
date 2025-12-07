@@ -21,7 +21,7 @@
             {% if animals %}
             <div id = "grid">
                 {% for animal in animals %}
-                    <a href="/animal/{{ shelterID }}/{{ animal['animal_id'] }}">
+                    <a href="/animal/{{ animal['animal_id'] }}">
                         <h2>{{ animal['name'] }}</h2>
                         <p>{{ animal['type'] }}</p>
                         <p>{{ animal['breed'] }}</p>
