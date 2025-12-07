@@ -319,7 +319,7 @@ def index_by_id(animalID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    animal = cursor.execute(('SELECT name, type, shelter_id, breed, animal_id, sex, date_time_arrived, vaccines, spayed_neutered FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
+    animal = cursor.execute(('SELECT name, type, status, shelter_id, breed, animal_id, sex, date_time_arrived, vaccines, spayed_neutered FROM Animal WHERE animal_id = ?'), (animalID,)).fetchone()
     conn.close()
     if not animal:
        return "Animal not found."
@@ -341,14 +341,14 @@ def addAnimal(shelterID = 0):
         sex = request.form.get('sex')
         status = request.form.get('status') or None
         date_time_arrived = request.form.get('date_time_arrived') or None
-        chipped = 0 if request.form.get('chipped') else 1
+        chipped = 1 if request.form.get('chipped') else 0
         date_last_vet_visit = request.form.get('date_last_vet_visit') or None
-        vaccines = 0 if request.form.get('vaccines') else 1
-        spayed_neutered = 0 if request.form.get('spayed_neutered') else 1
+        vaccines = 1 if request.form.get('vaccines') else 0
+        spayed_neutered = 1 if request.form.get('spayed_neutered') else 0
 
         # checkboxes – they only exist if checked
-        foster = 0 if request.form.get('foster') else 1
-        adopt = 0 if request.form.get('adopt') else 1
+        foster = 1 if request.form.get('foster') else 0
+        adopt = 1 if request.form.get('adopt') else 0
 
     with sqlite3.connect(DATABASE) as conn:
         cursor = conn.cursor()

@@ -2,43 +2,38 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    <title>{{animal['name']}}</title>
+    <title>{{ animal['name'] }}</title>
 </head>
 <body>
     <div id="container">
         <header>
             <h1>Meet {{ animal['name'] }}!</h1>
         </header>
-        <body>
+
         <nav id="navbar">
-            <a href = "/home/{{ animal['shelter_id' ]}}">Back to Shelter</a>
+            <a href="/home/{{ animal['shelter_id'] }}">Back to Shelter</a>
         </nav>
 
         <main>
             {% if animal %}
-                <div id = "animal-info">
+                <div id="animal-info">
                     <h2>Hi! I'm {{ animal['name'] }}!</h2>
-                    <p>Status: {{ animal['status'] }}</p>
+                    <h2>Status: {{ animal['status'] }}</h2>
                     <p>Type: {{ animal['type'] }}, {{ animal['breed'] }}</p>
                     <p>Sex: {{ animal['sex'] }}</p>
                     <p>Date Arrived: {{ animal['date_time_arrived'] }}</p>
+                    <p>Last Vet Visit: {{ animal['date_last_vet_visit'] or 'N/A' }}</p>
 
-                    {% if animal['vaccines'] == '1' %}
-                        <p>Vaccines Completed: Yes</p>
-                    {% else %}
-                        <p>Vaccines Completed: No</p>
-                    {% endif %}
-
-                    {% if animal['spayed_neutered'] == '1' %}
-                        <p>Spayed/Neutered: Yes</p>
-                    {% else %}
-                        <p>Spayed/Neutered: No</p>
-                    {% endif %}
+                    <p>Available for Foster? {% if animal['foster'] == 0 %}Yes{% else %}No{% endif %}</p>
+                    <p>Available for Adoption? {% if animal['adopt'] == 0 %}Yes{% else %}No{% endif %}</p>
+                    <p>Chipped? {% if animal['chipped'] == 0 %}Yes{% else %}No{% endif %}</p>
+                    <p>Vaccines Completed? {% if animal['vaccines'] == 1 %}Yes{% else %}No{% endif %}</p>
+                    <p>Spayed/Neutered? {% if animal['spayed_neutered'] == 1 %}Yes{% else %}No{% endif %}</p>
                 </div>
             {% endif %}
         </main>
-        </body>
-        <footer>Work in progress.</a></footer>
+
+        <footer>Work in progress.</footer>
     </div>
 </body>
 </html>
