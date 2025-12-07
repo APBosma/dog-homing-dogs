@@ -235,23 +235,24 @@ def preset():
     conn.close()
 
 class User(UserMixin): #represents logged in user. UserMixin is used so Flask-Login can handle the authentification automatically
-    def __init__(self, id, username, password, type):
+    def __init__(self, id, username, password, type, shelter_id):
         self.id = id
         self.username = username
         self.password = password
         self.type = type
+        self.shelter_id = shelter_id
 
     #looks up a user by id
     @staticmethod
     def get(user_id):
         conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
-        cursor.execute("SELECT id, username, password, type FROM login WHERE id = ?", (user_id,))
+        cursor.execute("SELECT id, username, password, type, shelter_id FROM login WHERE id = ?", (user_id,))
         user_data = cursor.fetchone()
         conn.close()
         if user_data:
             #returns user if found
-            return User(user_data[0], user_data[1], user_data[2], user_data[3])
+            return User(user_data[0], user_data[1], user_data[2], user_data[3], user_data[4])
         return None
 
 #loads the current user from the session
@@ -332,8 +333,13 @@ def index_by_id(animalID = 0):
 @app.route("/addAnimal/<int:shelterID>", methods = ['GET', 'POST'])
 @login_required
 def addAnimal(shelterID = 0):
+
+    if current_user.shelter_id != shelterID:
+        return "You do not have permission to add an animal to this shelter.", 403
+    
     if request.method == 'GET':
         return render_template("addAnimal.html", shelterID = shelterID)
+        
     if request.method == 'POST':
         name = request.form.get('name')
         type_ = request.form.get('type')
