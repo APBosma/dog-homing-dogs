@@ -296,7 +296,7 @@ def main(shelterID = 0):
     conn = sqlite3.connect(DATABASE)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    shelter = cursor.execute(('SELECT name FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
+    shelter = cursor.execute(('SELECT name, street1, phone, email, city, state, zip FROM Shelter WHERE shelter_id = ?'), (shelterID,)).fetchone()
     animals = cursor.execute(('SELECT animal_id, name, type, breed, sex FROM Animal WHERE shelter_id = ?'), (shelterID,)).fetchall()
     conn.close()
     if not shelter:
@@ -360,7 +360,91 @@ def addAnimal(shelterID = 0):
         # after inserting, go back to the shelter page
     return redirect(f"/home/{shelterID}")
 
-# button to link to adoption form, and shelter view
+
+# Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal #
+#---------------------------------------------------------------------------------------------------------------#
+
+@app.route('/edit_animal/<int:animalID>', methods=['GET', 'POST'])
+@login_required
+def edit_animal(animalID):
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    # Get the current animal data
+    animal = cursor.execute('SELECT * FROM Animal WHERE animal_id = ?', (animalID,)).fetchone()
+
+    if not animal:
+        conn.close()
+        return "Animal not found."
+    
+    if animal['shelter_id'] != current_user.shelter_id:
+        conn.close()
+        return "You do not have permission to modify this animal.", 403
+
+    if request.method == 'POST':
+        foster = 1 if request.form.get('foster') else 0
+        adopt = 1 if request.form.get('adopt') else 0
+        chipped = 1 if request.form.get('chipped') else 0
+        vaccines = 1 if request.form.get('vaccines') else 0
+        spayed_neutered = 1 if request.form.get('spayed_neutered') else 0
+
+        updated_data = (
+            request.form.get('name'),
+            request.form.get('type'),
+            request.form.get('breed'),
+            request.form.get('sex'),
+            foster,
+            adopt,
+            request.form.get('status'),
+            request.form.get('date_time_arrived'),
+            chipped,
+            request.form.get('date_last_vet_visit'),
+            vaccines,
+            spayed_neutered,
+            animalID  # This is for the WHERE clause
+        )
+
+        cursor.execute("""
+            UPDATE Animal
+            SET name = ?, type = ?, breed = ?, sex = ?, foster = ?, adopt = ?, status = ?,
+                date_time_arrived = ?, chipped = ?, date_last_vet_visit = ?, vaccines = ?, spayed_neutered = ?
+            WHERE animal_id = ?
+        """, updated_data)
+
+        conn.commit()
+        conn.close()
+
+        # Redirect back to the animal's page after update
+        return redirect(url_for('index_by_id', animalID=animalID))
+
+    conn.close()
+    return render_template('edit_animal.html', animal=animal)
+
+
+
+
+# Delete Animal - Delete Animal - Delete Animal - Delete Animal - Delete Animal - Delete Animal - Delete Animal #
+#--------------------------------------------------------------------------------------------------------------#
+
+@app.route("/animal/delete/<int:animalID>", methods=["POST"])
+@login_required
+def delete_animal(animalID):
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    
+    # Optional: get shelter_id to redirect back to shelter page after deletion
+    shelter_id = cursor.execute("SELECT shelter_id FROM Animal WHERE animal_id = ?", (animalID,)).fetchone()
+    if shelter_id:
+        shelter_id = shelter_id[0]
+        cursor.execute("DELETE FROM Animal WHERE animal_id = ?", (animalID,))
+        conn.commit()
+        conn.close()
+        return redirect(f"/home/{shelter_id}")
+    
+    conn.close()
+    return "Animal not found."
+
 
 # Login and Registration - Login and Registration - Login and Registration - Login and Registration #
 #---------------------------------------------------------------------------------------------------#

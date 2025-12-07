@@ -12,13 +12,19 @@
 
         <nav id="navbar">
             <a href="/home/{{ animal['shelter_id'] }}">Back to Shelter</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="nav-button">Logout</a>
+            {% else %}
+                <a href="/login.html" class="nav-button">Login</a>
+                <a href="/signup.html" class="nav-button">Sign Up</a>
+            {% endif %}
         </nav>
 
         <main>
             {% if animal %}
                 <div id="animal-info">
                     <h2>Hi! I'm {{ animal['name'] }}!</h2>
-                    <h2>Status: {{ animal['status'] }}</h2>
+                    <p>Status: {{ animal['status'] }}</p>
                     <p>Type: {{ animal['type'] }}, {{ animal['breed'] }}</p>
                     <p>Sex: {{ animal['sex'] }}</p>
                     <p>Date Arrived: {{ animal['date_time_arrived'] }}</p>
@@ -32,6 +38,19 @@
                 </div>
             {% endif %}
         </main>
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('edit_animal', animalID=animal['animal_id']) }}" method="GET" style="display:inline;">
+                <button type="submit" style="background-color:rgb(0, 102, 204); color:white; padding:5px 10px; border:none; cursor:pointer;">
+                    Edit Animal
+                </button>
+            </form>
+            <form action="{{ url_for('delete_animal', animalID=animal['animal_id']) }}" method="POST" 
+                onsubmit="return confirm('Are you sure you want to delete {{ animal['name'] }}?');">
+                <button type="submit" style="background-color:rgb(145, 0, 0); color:rgb(241, 241, 241); padding:5px 10px; border:none; cursor:pointer;">
+                    Delete Animal
+                </button>
+            </form>
+{% endif %}
 
         <footer>Work in progress.</footer>
     </div>

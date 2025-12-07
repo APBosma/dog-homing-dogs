@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edit {{ animal['name'] }}</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Edit {{ animal['name'] }}</h1>
+        </header>
+
+        <nav id="navbar">
+            <a href="/home/{{ animal['shelter_id'] }}">Back to Shelter</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="nav-button">Logout</a>
+            {% else %}
+                <a href = "login.html">Login</a>
+                <a href="signup.html">Sign Up</a>
+            {% endif %}
+        </nav>
+
+        <main>
+            {% if current_user.is_authenticated %}
+                <form action="{{ url_for('edit_animal', animalID=animal['animal_id']) }}" method="POST">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" value="{{ animal['name'] }}" required>
+                    </div>
+
+                    <div>
+                        <label for="status">Status:</label>
+                        <input type="text" id="status" name="status" value="{{ animal['status'] }}">
+                    </div>
+
+                    <div>
+                        <label for="type">Type:</label>
+                        <input type="text" id="type" name="type" value="{{ animal['type'] }}">
+                    </div>
+
+                    <div>
+                        <label for="breed">Breed:</label>
+                        <input type="text" id="breed" name="breed" value="{{ animal['breed'] }}">
+                    </div>
+
+                    <div>
+                        <label for="sex">Sex:</label>
+                        <input type="text" id="sex" name="sex" value="{{ animal['sex'] }}">
+                    </div>
+
+                    <div>
+                        <label for="date_time_arrived">Date Arrived:</label>
+                        <input type="date" id="date_time_arrived" name="date_time_arrived" value="{{ animal['date_time_arrived'] }}">
+                    </div>
+
+                    <div>
+                        <label for="date_last_vet_visit">Last Vet Visit:</label>
+                        <input type="date" id="date_last_vet_visit" name="date_last_vet_visit" value="{{ animal['date_last_vet_visit'] }}">
+                    </div>
+
+                    <div>
+                        <label for="foster">Available for Foster?</label>
+                        <select id="foster" name="foster">
+                            <option value="0" {% if animal['foster'] == 0 %}selected{% endif %}>Yes</option>
+                            <option value="1" {% if animal['foster'] == 1 %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="adopt">Available for Adoption?</label>
+                        <select id="adopt" name="adopt">
+                            <option value="0" {% if animal['adopt'] == 0 %}selected{% endif %}>Yes</option>
+                            <option value="1" {% if animal['adopt'] == 1 %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="chipped">Chipped?</label>
+                        <select id="chipped" name="chipped">
+                            <option value="0" {% if animal['chipped'] == 0 %}selected{% endif %}>Yes</option>
+                            <option value="1" {% if animal['chipped'] == 1 %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="vaccines">Vaccines Completed?</label>
+                        <select id="vaccines" name="vaccines">
+                            <option value="1" {% if animal['vaccines'] == 1 %}selected{% endif %}>Yes</option>
+                            <option value="0" {% if animal['vaccines'] == 0 %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="spayed_neutered">Spayed/Neutered?</label>
+                        <select id="spayed_neutered" name="spayed_neutered">
+                            <option value="1" {% if animal['spayed_neutered'] == 1 %}selected{% endif %}>Yes</option>
+                            <option value="0" {% if animal['spayed_neutered'] == 0 %}selected{% endif %}>No</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button type="submit" style="background-color:rgb(0, 102, 204); color:white; padding:5px 10px; border:none; cursor:pointer;">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            {% else %}
+                <p>You must be logged in to edit this animal.</p>
+            {% endif %}
+        </main>
+
+        <footer>Work in progress.</footer>
+    </div>
+</body>
+</html>
