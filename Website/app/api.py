@@ -656,29 +656,6 @@ def owner_dashboard():
     # Redirect shelter owners to the main index page
     return redirect(url_for('index'))
 
-#auto logs out after a certain amount of time - I have 5 minutes right now.
-@app.before_request
-def auto_logout():
-    #skips users that are not logged in
-    if not current_user.is_authenticated:
-        return
-
-    #gets the last activity time
-    lasttime = session.get("last_activity")
-
-    now = int(time.time())
-    session["last_activity"] = now  # updates timestamp for each request
-
-    #if time is equal to none, returns
-    if lasttime is None:
-        return
-
-    #if lasttime is more than 5 minutes (300 sec). It goes by seconds
-    if now - lasttime > 300:
-        logout_user()
-        session.clear()
-        return redirect(url_for("login"))
-
 #auto logs out after a certain amount of time. I have 5 minutes right now.
 @app.before_request
 def auto_logout():
