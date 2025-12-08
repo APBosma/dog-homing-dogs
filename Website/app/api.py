@@ -24,6 +24,7 @@ from . import app
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
+import time
 
 #used by Flask to securely sign session cookies
 app.config['SECRET_KEY'] = 'secret_key' #replace with secret key
@@ -655,6 +656,51 @@ def owner_dashboard():
     # Redirect shelter owners to the main index page
     return redirect(url_for('index'))
 
+#auto logs out after a certain amount of time - I have 5 minutes right now.
+@app.before_request
+def auto_logout():
+    #skips users that are not logged in
+    if not current_user.is_authenticated:
+        return
+
+    #gets the last activity time
+    lasttime = session.get("last_activity")
+
+    now = int(time.time())
+    session["last_activity"] = now  # updates timestamp for each request
+
+    #if time is equal to none, returns
+    if lasttime is None:
+        return
+
+    #if lasttime is more than 5 minutes (300 sec). It goes by seconds
+    if now - lasttime > 300:
+        logout_user()
+        session.clear()
+        return redirect(url_for("login"))
+
+#auto logs out after a certain amount of time. I have 5 minutes right now.
+@app.before_request
+def auto_logout():
+    #if user is not logged in, skips them
+    if not current_user.is_authenticated:
+        return
+
+    #gets the last activity time
+    lasttime = session.get("last_activity")
+
+    currentTime = int(time.time())
+    session["last_activity"] = currentTime  # updates timestamp for each request
+
+    #if time is equal to none, returns
+    if lasttime is None:
+        return
+
+    #if lasttime is more than 5 minutes (300 sec), it checks by seconds
+    if currentTime - lasttime > 300:
+        logout_user()
+        session.clear()
+        return redirect(url_for("login"))
 
 if __name__ == '__main__':
     preset() #creates our db and adds our info 
