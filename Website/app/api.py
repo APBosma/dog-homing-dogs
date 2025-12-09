@@ -19,7 +19,7 @@ I also looked at previously made portions of the API and implemented some of the
 """
 
 
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template, session
 from . import app
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
