@@ -599,13 +599,6 @@ def login():
         if user_data and check_password_hash(user_data[2], password):
             user = User(user_data[0], user_data[1], user_data[2], user_data[3], user_data[4])
             login_user(user) #logs the user in
-            conn = get_db_connection()
-            cursor = conn.cursor()
-            cursor.execute("SELECT shelter_id FROM login WHERE id = ?", (user.id,))
-            row = cursor.fetchone()
-            conn.close()
-
-            # user_shelter_id = user.shelter_id
 
             if user.type == 'shelter' and user.shelter_id:
                 return redirect(url_for('shelter_dashboard'))
