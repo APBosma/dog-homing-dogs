@@ -24,14 +24,20 @@
         </header>
 
         <nav id="navbar">
-            <a href = "{{ indexLink }}">Back to Shelter</a>
+            <a href="{{ indexLink }}">Back to Shelter</a>
             <a href="#">Something Else, IDK</a>
         </nav>
+
+        <!-- ✅ Added a simple button to open the foster form -->
+        <div style="margin-top: 10px;">
+            <a href="/home/{{ shelter['shelter_id'] }}/add_foster">
+                <button type="button">Add a Foster</button>
+            </a>
+        </div>
 
         <body>
             {% if animals %}
                 {% for animal in animals %}
-                    
                     <div><p>{{ animal['name'] }}</p></div>
                     <a href="/animal/{{ shelter['shelter_id'] }}/{{ animal['animal_id'] }}">
                         <button type="button">Meet {{ animal['name'] }}!</button>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+    <title>Foster - {{ shelter['name'] }}</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <p>Adding a new foster for {{ shelter['name'] }}</p>
+        </header>
+
+        <nav id="navbar">
+            <a href="{{ url_for('main', shelterID=shelter['shelter_id']) }}">Back to Shelter</a>
+            <a href="#">Coming Soon</a>
+        </nav>
+
+        <body>
+            <form method="POST">
+                <div>
+                    <p>
+                        <label>Pick an Animal:</label>
+                        <select name="animal_id" required>
+                            <option value="" disabled selected>Select one</option>
+                            {% for animal in animals %}
+                                <option value="{{ animal['animal_id'] }}">{{ animal['name'] }}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+
+                    <p>Other Pets: <input type="number" name="other_pets" min="0" required></p>
+                    <p>Children: <input type="number" name="children" min="0" required></p>
+                    <p>Adults in Home: <input type="number" name="num_adults" min="1" required></p>
+
+                    <p>Notes:</p>
+                    <textarea name="notes" rows="3" cols="40" placeholder="Anything we should know?"></textarea>
+
+                    <p>Start Date: <input type="date" name="datetime_start" required></p>
+                    <p>End Date: <input type="date" name="datetime_end" required></p>
+
+                    <button type="submit">Save Foster Info</button>
+                </div>
+            </form>
+        </body>
+
+        <footer>
+            Work in progress.
+        </footer>
+    </div>
+</body>
+</html>
+
+<!--Helped by examples from:
+https://www.w3schools.com/html/html_forms.asp
+https://www.w3schools.com/tags/tag_select.asp
+https://www.w3schools.com/tags/tag_textarea.asp-->

@@ -8,7 +8,7 @@
 # information was not printing. Found out everything is tuples. Tuples all the way down. This led to me getting the animal information outputted.
 # I had seen previous mentions of a form with HTML so I looked up "HTML form" and used W3 for my form syntax since they're my go-to for
 # documentation. This was used for login and sign up.
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from . import app
 import sqlite3
 
@@ -260,6 +260,75 @@ def index_by_id(shelterID = 1, animalID = 0):
     if not animal:
        return "Animal not found."
     return render_template("animal.html", animal=animal, indexLink = "/home/" + str(shelterID))
+
+# (COMPLETED) ADD FOSTER - ADD FOSTER - ADD FOSTER - ADD FOSTER - ADD FOSTER #
+#---------------------------------------------------------------------------------------------------#
+"""
+Routes: /home/<int:shelterID>/add_foster
+Methods: GET, POST
+Template: add_foster.html
+Purpose:
+    - GET: Show a form to assign a foster record for an animal from a shelter
+    - POST: Add a new foster entry linked to that shelter and animal
+"""
+@app.route("/home/<int:shelterID>/add_foster", methods=["GET", "POST"])
+def foster(shelterID=0):
+    conn = sqlite3.connect(DATABASE)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    # Handle POST (form submission)
+    if request.method == "POST":
+        animal_id = request.form.get("animal_id")
+        other_pets = request.form.get("other_pets")
+        children = request.form.get("children")
+        num_adults = request.form.get("num_adults")
+        notes = request.form.get("notes")
+        datetime_start = request.form.get("datetime_start")
+        datetime_end = request.form.get("datetime_end")
+
+        # Insert foster record (links the animal to the shelter)
+        cursor.execute("""
+            INSERT INTO Foster (
+                animal_id,
+                shelter_id,
+                other_pets,
+                children,
+                num_adults,
+                notes,
+                datetime_start,
+                datetime_end,
+                account_id
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, NULL)
+        """, (
+            animal_id,
+            shelterID,
+            other_pets,
+            children,
+            num_adults,
+            notes,
+            datetime_start,
+            datetime_end
+        ))
+
+        # Update animal status to "Fostered"
+        cursor.execute("UPDATE Animal SET status = ? WHERE animal_id = ?", ("Fostered", animal_id))
+
+        conn.commit()
+        conn.close()
+        return redirect(url_for("main", shelterID=shelterID))
+
+    # Handle GET (show form)
+    shelter = cursor.execute("SELECT name FROM Shelter WHERE shelter_id = ?", (shelterID,)).fetchone()
+    animals = cursor.execute(
+        "SELECT animal_id, name FROM Animal WHERE shelter_id = ? AND status != 'Fostered'",
+        (shelterID,)
+    ).fetchall()
+
+    conn.close()
+    return render_template("foster.html", shelter=shelter, animals=animals, shelterID=shelterID)
+
 
 
 # (NOT COMPLETED) ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT - ACCOUNT #
