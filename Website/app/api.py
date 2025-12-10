@@ -330,7 +330,12 @@ def index_by_id(animalID = 0):
    
 # Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal - Add Animal #
 #---------------------------------------------------------------------------------------------------#
-
+"""
+Routes: /addAnimal/int
+Methods: GET, POST
+Template: addAnimal.html
+Returns: Adds an animal to the database and also creates the addAnimal page
+"""
 @app.route("/addAnimal/<int:shelterID>", methods = ['GET', 'POST'])
 @login_required
 def addAnimal(shelterID = 0):
@@ -370,7 +375,12 @@ def addAnimal(shelterID = 0):
 
 # Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal - Edit Animal #
 #---------------------------------------------------------------------------------------------------------------#
-
+"""
+Routes: /edit_animal/int
+Methods: GET, POST
+Template: animal.html
+Returns: Returns an edit form for the animal and edits the information in the database
+"""
 @app.route('/edit_animal/<int:animalID>', methods=['GET', 'POST'])
 @login_required
 def edit_animal(animalID):
@@ -433,7 +443,12 @@ def edit_animal(animalID):
 
 # Delete Animal - Delete Animal - Delete Animal - Delete Animal - Delete Animal - Delete Animal - Delete Animal #
 #--------------------------------------------------------------------------------------------------------------#
-
+"""
+Routes: /animal/idelete/int
+Methods: POST
+Template: None
+Returns: Removes animal and sends user to shelter home
+"""
 @app.route("/animal/delete/<int:animalID>", methods=["POST"])
 @login_required
 def delete_animal(animalID):
@@ -455,8 +470,12 @@ def delete_animal(animalID):
 
 # Login and Registration - Login and Registration - Login and Registration - Login and Registration #
 #---------------------------------------------------------------------------------------------------#
-
-#registration; displays form in both GET and POST
+"""
+Routes: /signup.html
+Methods: GET, POST
+Template: signup.html
+Returns: Creates signup page and adds user
+"""
 @app.route('/signup.html', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -581,7 +600,12 @@ def register():
     shelters = cursor.execute('SELECT name, shelter_id FROM Shelter').fetchall()
     return render_template('signup.html', shelters = shelters)
 
-#for login
+"""
+Routes: /login.html
+Methods: GET, POST
+Template: login.html
+Returns: Returns login page and logs in user before sending them to the shelter home page
+"""
 @app.route('/login.html', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -614,14 +638,24 @@ def login():
     
     return render_template('login.html')
 
+"""
+Routes: /logout
+Methods: NONE
+Template: NONE
+Returns: Logs out user, sends them to login
+"""
 @app.route('/logout')
 @login_required #makes sure only logged in people can log out
 def logout(): #logs out current user
     logout_user()
     return redirect(url_for('login'))
 
-#for our different account types. 
-#logs user into shelter
+"""
+Routes: /shelter_dashboard
+Methods: NONE
+Template: NONE
+Returns: Sends you to the shelter dashboard if the user type is valid
+"""
 @app.route('/shelter_dashboard')
 @login_required
 def shelter_dashboard():
@@ -639,7 +673,12 @@ def shelter_dashboard():
 
     return "Error: No shelter associated with this account"
 
-#logs user into owner
+"""
+Routes: /owner_dashboard
+Methods: NONE
+Template: NONE
+Returns: Validates user type and sends them to the owner_dashboard
+"""
 @app.route('/owner_dashboard')
 @login_required
 def owner_dashboard():
