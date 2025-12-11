@@ -7,22 +7,30 @@
 <body>
     <div id="container">
         <header>
-            <p>Login</p>
+            <h1>Login</h1>
         </header>
         <nav id="navbar">
             <a href = "/">Back</a>
         </nav>
 
         <body>
-            <form action="/login.html" method="POST">
-                <br>
-                <label for = "username">Username:</label><br>
-                <input type = "text" id = "useranme" name = "username" maxlength="50"><br>
-                <label for = "password">Password:</label><br>
-                <input type = "password" id = "password" name = "password" maxlength="50"><br>
-                <br>
-                <input type="submit" value="Login">
-            </form>
+            <div id = "login-container">
+                <div></div>
+                <div></div>
+                <div>
+                    <form action="/login.html" method="POST">
+                        <br>
+                        <label for = "username">Username:</label><br>
+                        <input type = "text" id = "useranme" name = "username" maxlength="50"><br>
+                        <label for = "password">Password:</label><br>
+                        <input type = "password" id = "password" name = "password" maxlength="50"><br>
+                        <br>
+                        <input type="submit" value="Login">
+                    </form>
+                </div>
+                <div></div>
+                <div></div>
+            </div>
             {% if error %}
                 <p style="color: red;">{{ error }}</p>
             {% endif %}

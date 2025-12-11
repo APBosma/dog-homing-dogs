@@ -50,6 +50,34 @@ main {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#login-container form {
+    padding: 5% 5%;
+    border-width: 20px;
+    border-style: solid;
+    border-color: #84a98c;
+    margin: 3%;
+}
+
+#login-container form label {
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 2% 1%;
+}
+
+#login-container form input {
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 2% 1%;
+}
+
+#login-container div {
+    flex: 1;
+}
+
+#login-container {
+    display: flex;
+}
+
 /* I didn't know how to get the shelters to display like a grid so I looked up on google 
 "how to have flask posts display in grid format" and honestly the AI wasn't a big help besides mentioning using a div for the grid. I 
 then looked up on W3 grids and went used their grid page (https://www.w3schools.com/css/css_grid.asp) to help me set this up. */
